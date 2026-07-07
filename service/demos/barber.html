@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fade District Barbershop — Cuts, Fades & Beard Work</title>
+<style>
+  :root{--ink:#161310;--cream:#f5efe6;--gold:#c8963e;--brown:#6b4f2e;--line:#e3d9c8}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:Georgia,"Times New Roman",serif;background:var(--cream);color:var(--ink);line-height:1.65}
+  .sans{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  header{background:var(--ink);color:var(--cream);position:sticky;top:0;z-index:10}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+  .logo{font-weight:700;font-size:1.2rem;letter-spacing:.12em}
+  .logo span{color:var(--gold)}
+  nav a.book{background:var(--gold);color:var(--ink);text-decoration:none;padding:10px 22px;border-radius:4px;font-weight:700;font-size:.85rem;letter-spacing:.08em}
+  .hero{background:linear-gradient(rgba(22,19,16,.82),rgba(22,19,16,.9)),repeating-linear-gradient(45deg,#1d1915 0 14px,#161310 14px 28px);color:var(--cream);text-align:center;padding:110px 22px}
+  .hero .tag{color:var(--gold);letter-spacing:.35em;font-size:.8rem;margin-bottom:18px}
+  .hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:700;letter-spacing:.02em}
+  .hero p{margin:18px auto 0;max-width:460px;color:#cfc6b8;font-size:1.05rem}
+  .hero .btn{display:inline-block;margin-top:34px;background:var(--gold);color:var(--ink);text-decoration:none;padding:15px 38px;border-radius:4px;font-weight:700;letter-spacing:.1em;font-size:.9rem}
+  .bar{background:var(--gold);color:var(--ink);text-align:center;padding:12px;font-weight:700;letter-spacing:.06em;font-size:.9rem}
+  section{padding:72px 0}
+  h2{font-size:2rem;text-align:center;margin-bottom:8px}
+  .rule{width:56px;height:3px;background:var(--gold);margin:0 auto 44px}
+  .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 48px;max-width:760px;margin:0 auto}
+  .svc{display:flex;justify-content:space-between;align-items:baseline;padding:16px 4px;border-bottom:1px solid var(--line)}
+  .svc .name{font-weight:700}
+  .svc .desc{font-size:.85rem;color:var(--brown)}
+  .svc .price{font-weight:700;color:var(--gold);font-size:1.1rem;white-space:nowrap;margin-left:16px}
+  .dark{background:var(--ink);color:var(--cream)}
+  .cuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .cut{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#241f19,#2e281f);border:1px solid #3a332a}
+  .hours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:820px;margin:0 auto}
+  .hcard{background:#fff;border:1px solid var(--line);border-radius:8px;padding:30px}
+  .hcard h3{margin-bottom:14px;color:var(--brown);letter-spacing:.06em;font-size:1rem}
+  .hcard table{width:100%;border-collapse:collapse;font-size:.95rem}
+  .hcard td{padding:7px 0;border-bottom:1px solid var(--line)}
+  .hcard td:last-child{text-align:right;font-weight:700}
+  .map{background:#fff;border:1px solid var(--line);border-radius:8px;height:100%;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--brown);gap:8px}
+  footer{background:var(--ink);color:#8d8577;text-align:center;padding:40px 22px;font-size:.85rem}
+  footer .logo{margin-bottom:8px;color:var(--cream)}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><nav>
+  <div class="logo sans">FADE <span>DISTRICT</span></div>
+  <a class="book sans" href="#visit">BOOK A CHAIR</a>
+</nav></div></header>
+
+<div class="hero">
+  <div class="tag sans">EST. 2019 — WALK-INS WELCOME</div>
+  <h1>Sharp cuts.<br>No shortcuts.</h1>
+  <p>Fades, tapers, beard work and hot towel shaves from barbers who treat your lineup like it's their reputation. Because it is.</p>
+  <a class="btn sans" href="#visit">BOOK YOUR CUT</a>
+</div>
+
+<div class="bar sans">📍 412 Grove Street &nbsp;•&nbsp; ☎ (555) 014-2210 &nbsp;•&nbsp; Open 7 days</div>
+
+<section id="services">
+  <div class="wrap">
+    <h2>Services</h2><div class="rule"></div>
+    <div class="services">
+      <div class="svc"><div><div class="name">Signature Fade</div><div class="desc sans">Skin, mid or high — dialed in</div></div><div class="price">$35</div></div>
+      <div class="svc"><div><div class="name">Classic Cut</div><div class="desc sans">Scissor work, clean finish</div></div><div class="price">$30</div></div>
+      <div class="svc"><div><div class="name">Cut + Beard Combo</div><div class="desc sans">The full reset</div></div><div class="price">$50</div></div>
+      <div class="svc"><div><div class="name">Beard Sculpt</div><div class="desc sans">Line-up, shape, hot towel</div></div><div class="price">$22</div></div>
+      <div class="svc"><div><div class="name">Kids Cut (12 &amp; under)</div><div class="desc sans">Patience included</div></div><div class="price">$22</div></div>
+      <div class="svc"><div><div class="name">Hot Towel Shave</div><div class="desc sans">Straight razor, old school</div></div><div class="price">$40</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <h2>The work speaks</h2><div class="rule"></div>
+    <div class="cuts">
+      <div class="cut">💈</div><div class="cut">✂️</div><div class="cut">🪒</div><div class="cut">💈</div>
+    </div>
+    <p class="sans" style="text-align:center;margin-top:20px;color:#8d8577;font-size:.85rem">[ Client photo gallery goes here — pulled from your Instagram ]</p>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <h2>Come through</h2><div class="rule"></div>
+    <div class="hours-grid">
+      <div class="hcard">
+        <h3 class="sans">HOURS</h3>
+        <table class="sans">
+          <tr><td>Mon – Fri</td><td>9am – 7pm</td></tr>
+          <tr><td>Saturday</td><td>8am – 6pm</td></tr>
+          <tr><td>Sunday</td><td>10am – 4pm</td></tr>
+        </table>
+        <p class="sans" style="margin-top:16px;font-size:.9rem;color:var(--brown)">Walk-ins welcome. Skip the wait: <b>(555) 014-2210</b></p>
+      </div>
+      <div class="map sans">
+        <div style="font-size:2.2rem">📍</div>
+        <b>412 Grove Street</b>
+        <div style="font-size:.85rem">[ Live Google Map embeds here ]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="sans">
+  <div class="logo">FADE <span style="color:var(--gold)">DISTRICT</span></div>
+  © 2026 Fade District Barbershop — Demo site by Blankd Web Studio
+</footer>
+
+</body>
+</html>

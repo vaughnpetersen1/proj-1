@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blankd Web Studio — Your Website, Live in 48 Hours. $300 Flat.</title>
+<meta name="description" content="Professional websites for local businesses. $300 flat rate, live in 48 hours. No agencies, no $2,500 quotes, no monthly surprises.">
+<style>
+  :root{
+    --bg:#0b0d12; --panel:#12151d; --panel2:#181c26; --line:#252a37;
+    --text:#e8eaf0; --muted:#9aa1b2; --accent:#4f7cff; --accent2:#7c5cff;
+    --good:#3ecf8e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;background:rgba(11,13,18,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:10}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{font-weight:800;font-size:1.15rem;letter-spacing:.5px}
+  .logo span{color:var(--accent)}
+  nav a.cta{background:var(--accent);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.95rem;transition:opacity .2s}
+  nav a.cta:hover{opacity:.85}
+  .hero{padding:96px 0 72px;text-align:center}
+  .hero .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--good);padding:6px 14px;border-radius:99px;font-size:.85rem;font-weight:600;margin-bottom:24px}
+  .hero h1{font-size:clamp(2.1rem,5.5vw,3.4rem);line-height:1.15;font-weight:800;letter-spacing:-.02em}
+  .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{max-width:560px;margin:20px auto 0;color:var(--muted);font-size:1.15rem}
+  .hero .actions{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-size:1rem;transition:transform .15s,opacity .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.ghost{border:1px solid var(--line);color:var(--text);background:var(--panel)}
+  .strip{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--muted);font-size:.95rem}
+  .strip b{color:var(--text)}
+  section{padding:80px 0}
+  h2{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+  .sub{color:var(--muted);max-width:600px;margin-bottom:44px;font-size:1.05rem}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .card .num{font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:10px;letter-spacing:.08em}
+  .card h3{font-size:1.15rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.97rem}
+  .work .card{padding:0;overflow:hidden;text-decoration:none;display:block;transition:transform .15s,border-color .2s}
+  .work .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;border-bottom:1px solid var(--line)}
+  .thumb.a{background:linear-gradient(135deg,#1a1206,#241a08)}
+  .thumb.b{background:linear-gradient(135deg,#06121a,#081f2b)}
+  .work .meta{padding:20px 24px}
+  .work .meta h3{color:var(--text)}
+  .work .meta p{color:var(--muted);font-size:.92rem}
+  .price-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:760px;margin:0 auto}
+  .price{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:36px 32px;text-align:center}
+  .price.featured{border-color:var(--accent);position:relative}
+  .price.featured::before{content:"MOST POPULAR";position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.7rem;font-weight:800;letter-spacing:.1em;padding:4px 12px;border-radius:99px}
+  .price .amount{font-size:3rem;font-weight:800;margin:10px 0 2px}
+  .price .amount small{font-size:1.1rem;color:var(--muted);font-weight:600}
+  .price ul{list-style:none;text-align:left;margin:24px 0;color:var(--muted)}
+  .price li{padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .price li::before{content:"✓  ";color:var(--good);font-weight:700}
+  .price li:last-child{border:none}
+  .faq .card{margin-bottom:14px}
+  .faq h3{font-size:1.05rem}
+  footer{border-top:1px solid var(--line);padding:48px 0;text-align:center;color:var(--muted);font-size:.9rem}
+  .final{text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:64px 32px}
+  .final h2{margin-bottom:8px}
+  .final p{color:var(--muted);margin-bottom:28px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><nav>
+    <div class="logo">BLANK<span>D</span> WEB STUDIO</div>
+    <a class="cta" href="#contact">Get your site →</a>
+  </nav></div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="badge">● Now booking — 2 build slots this week</div>
+    <h1>Your business deserves a real website.<br><em>Live in 48 hours. $300 flat.</em></h1>
+    <p>No $2,500 agency quotes. No "it'll be ready next quarter." One flat price, a site your customers can actually find, done in two days.</p>
+    <div class="actions">
+      <a class="btn primary" href="#contact">Get your site — $300</a>
+      <a class="btn ghost" href="#work">See example sites</a>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div><b>$300</b> — one flat price</div>
+    <div><b>48 hours</b> — from deposit to live</div>
+    <div><b>$10/mo</b> — hosting + updates, optional</div>
+    <div><b>Mobile-first</b> — looks great on every phone</div>
+  </div>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="sub">Three steps. You'll spend maybe 30 minutes on this, total.</p>
+    <div class="grid3">
+      <div class="card"><div class="num">STEP 01</div><h3>Tell me about your business</h3><p>A quick call or text thread. Your hours, services, photos, and what makes you the one to call. That's all I need.</p></div>
+      <div class="card"><div class="num">STEP 02</div><h3>I build it in 48 hours</h3><p>Custom design — not a template with your name slapped on. Built to load fast and rank on Google Maps searches.</p></div>
+      <div class="card"><div class="num">STEP 03</div><h3>You go live</h3><p>Review it, request tweaks, done. Optional $10/mo covers hosting, edits, and keeping everything running so you never think about it.</p></div>
+    </div>
+  </section>
+
+  <section id="work" class="work">
+    <h2>Recent work</h2>
+    <p class="sub">Every site is built for the business it belongs to. Tap to view a live demo.</p>
+    <div class="grid3">
+      <a class="card" href="../demos/barber.html">
+        <div class="thumb a">💈</div>
+        <div class="meta"><h3>Fade District Barbershop</h3><p>Bookings-focused one-pager • services, pricing, hours, map</p></div>
+      </a>
+      <a class="card" href="../demos/detailing.html">
+        <div class="thumb b">🚗</div>
+        <div class="meta"><h3>Mirror Finish Auto Detailing</h3><p>Package pricing + before/after gallery + quote requests</p></div>
+      </a>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <h2 style="text-align:center">Simple, honest pricing</h2>
+    <p class="sub" style="text-align:center;margin-left:auto;margin-right:auto">The price on this page is the price you pay. That's the whole point.</p>
+    <div class="price-wrap">
+      <div class="price featured">
+        <h3>The Website</h3>
+        <div class="amount">$300</div>
+        <div style="color:var(--muted);font-size:.9rem">one-time, flat</div>
+        <ul>
+          <li>Custom design, built for your business</li>
+          <li>Live in 48 hours from deposit</li>
+          <li>Mobile-first &amp; fast-loading</li>
+          <li>Google Maps + click-to-call ready</li>
+          <li>Two rounds of revisions included</li>
+        </ul>
+        <a class="btn primary" href="#contact">Claim a build slot</a>
+      </div>
+      <div class="price">
+        <h3>Care Plan</h3>
+        <div class="amount">$10<small>/mo</small></div>
+        <div style="color:var(--muted);font-size:.9rem">optional, cancel anytime</div>
+        <ul>
+          <li>Hosting handled — site stays online</li>
+          <li>Text me an edit, it's done in 24h</li>
+          <li>Hours, menu &amp; price changes anytime</li>
+          <li>You never touch a control panel</li>
+        </ul>
+        <a class="btn ghost" href="#contact">Add at delivery</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>Fair questions</h2>
+    <div class="card"><h3>Why so much cheaper than an agency?</h3><p>No office, no account managers, no 6-week "discovery phase." Just the site, built well, built fast.</p></div>
+    <div class="card"><h3>What if I don't like it?</h3><p>Two revision rounds are included, and you only pay the second half when you're happy enough to go live.</p></div>
+    <div class="card"><h3>Do I own the site?</h3><p>Yes. It's yours. The care plan is convenience, not a hostage situation — cancel anytime and take the files with you.</p></div>
+  </section>
+
+  <section id="contact">
+    <div class="final">
+      <h2>Two build slots open this week.</h2>
+      <p>Text or email what your business does — I'll reply the same day with exactly what your site would look like.</p>
+      <a class="btn primary" href="mailto:wearblankd@gmail.com?subject=Website%20for%20my%20business">📧 wearblankd@gmail.com</a>
+    </div>
+  </section>
+
+</div>
+
+<footer><div class="wrap">© 2026 Blankd Web Studio — $300 flat. 48 hours. That's it.</div></footer>
+
+</body>
+</html>
