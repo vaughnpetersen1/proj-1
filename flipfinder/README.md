@@ -29,6 +29,20 @@ thinks before touching real money.
 
 **Never commit the keys to this repo.** Environment variables only.
 
+## Watchlist mode (the daily driver)
+
+Put your saved searches in `watchlist.json` (copy `watchlist.example.json`),
+each with its own buy cap and profit floor, then scan everything at once:
+
+```bash
+python3 flipfinder.py --watchlist          # live
+python3 flipfinder.py --watchlist --mock   # practice
+```
+
+Every deal flagged in live mode is appended to `deals_log.csv` — over a few
+weeks that log shows you which categories actually produce deals, so we can
+prune the duds.
+
 ## Useful flags
 
 | Flag | Default | What it does |

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taquería Del Sol — Street Tacos, Birria & Aguas Frescas</title>
+<style>
+  :root{--red:#c62b2b;--dark:#301410;--cream:#fdf6ec;--yellow:#f2b632;--green:#3e7c4f;--line:#ecdfc8}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--cream);color:var(--dark);line-height:1.6}
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px}
+  header{background:var(--red);color:#fff;position:sticky;top:0;z-index:10}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+  .logo{font-weight:900;font-size:1.25rem;letter-spacing:.02em}
+  .logo span{color:var(--yellow)}
+  nav a.order{background:var(--yellow);color:var(--dark);text-decoration:none;padding:10px 22px;border-radius:99px;font-weight:800;font-size:.9rem}
+  .hero{background:linear-gradient(rgba(48,20,16,.55),rgba(48,20,16,.75)),repeating-linear-gradient(-45deg,#8f1f1f 0 60px,#a32424 60px 120px);color:#fff;text-align:center;padding:104px 22px}
+  .hero .tag{display:inline-block;background:var(--yellow);color:var(--dark);font-weight:800;font-size:.8rem;letter-spacing:.14em;padding:6px 16px;border-radius:99px;margin-bottom:20px}
+  .hero h1{font-size:clamp(2.4rem,6.5vw,4.2rem);font-weight:900;line-height:1.08;text-shadow:0 3px 12px rgba(0,0,0,.35)}
+  .hero p{margin:18px auto 0;max-width:480px;font-size:1.12rem;color:#ffe9d6}
+  .hero .btns{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 32px;border-radius:99px;font-weight:800;text-decoration:none;font-size:1rem}
+  .btn.gold{background:var(--yellow);color:var(--dark)}
+  .btn.line{border:2px solid #fff;color:#fff}
+  .ticker{background:var(--dark);color:var(--yellow);text-align:center;padding:12px;font-weight:700;letter-spacing:.05em;font-size:.92rem}
+  section{padding:72px 0}
+  h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;text-align:center}
+  .under{width:70px;height:5px;background:var(--yellow);border-radius:99px;margin:14px auto 46px}
+  .menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 56px;max-width:820px;margin:0 auto}
+  .item{display:flex;justify-content:space-between;align-items:baseline;padding:15px 4px;border-bottom:2px dotted var(--line)}
+  .item .n{font-weight:800}
+  .item .d{font-size:.86rem;color:#7a5a4a}
+  .item .p{font-weight:900;color:var(--red);font-size:1.08rem;margin-left:16px;white-space:nowrap}
+  .feature{background:var(--red);color:#fff}
+  .feature .under{background:#fff}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .fcard{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:28px;text-align:center}
+  .fcard .emoji{font-size:2.8rem;margin-bottom:10px}
+  .fcard h3{font-size:1.15rem;margin-bottom:6px}
+  .fcard p{font-size:.92rem;color:#ffd9c4}
+  .visit{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:840px;margin:0 auto}
+  .vcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px}
+  .vcard h3{color:var(--red);letter-spacing:.08em;font-size:.95rem;margin-bottom:14px}
+  .vcard table{width:100%;border-collapse:collapse;font-size:.95rem}
+  .vcard td{padding:7px 0;border-bottom:1px solid var(--line)}
+  .vcard td:last-child{text-align:right;font-weight:800}
+  .vcard .map{height:150px;border-radius:8px;background:var(--cream);border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;color:#a0806a;font-size:.85rem;margin-top:6px}
+  footer{background:var(--dark);color:#c9a28d;text-align:center;padding:40px 22px;font-size:.85rem}
+  footer .logo{color:#fff;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><nav>
+  <div class="logo">TAQUERÍA <span>DEL SOL</span></div>
+  <a class="order" href="#visit">ORDER NOW</a>
+</nav></div></header>
+
+<div class="hero">
+  <div class="tag">🌮 FAMILY RECIPES SINCE 1998</div>
+  <h1>Tacos worth<br>the line.</h1>
+  <p>Birria that falls apart, al pastor off the trompo, tortillas pressed to order. This is the real thing.</p>
+  <div class="btns">
+    <a class="btn gold" href="#menu">See the menu</a>
+    <a class="btn line" href="tel:5550143377">☎ Call in an order</a>
+  </div>
+</div>
+
+<div class="ticker">🔥 TACO TUESDAY — $2 STREET TACOS ALL DAY &nbsp;•&nbsp; OPEN LATE FRI & SAT ‘TIL 2AM</div>
+
+<section id="menu">
+  <div class="wrap">
+    <h2>The Menu</h2><div class="under"></div>
+    <div class="menu">
+      <div class="item"><div><div class="n">Street Tacos (3)</div><div class="d">asada, pastor, pollo, or carnitas</div></div><div class="p">$8.50</div></div>
+      <div class="item"><div><div class="n">Birria Tacos (3) + Consomé</div><div class="d">the ones from the videos</div></div><div class="p">$13.99</div></div>
+      <div class="item"><div><div class="n">Burrito Del Sol</div><div class="d">choice of meat, loaded</div></div><div class="p">$11.50</div></div>
+      <div class="item"><div><div class="n">Quesabirria (3)</div><div class="d">crispy, cheesy, dippable</div></div><div class="p">$14.50</div></div>
+      <div class="item"><div><div class="n">Torta Ahogada</div><div class="d">drowned in salsa roja</div></div><div class="p">$12.00</div></div>
+      <div class="item"><div><div class="n">Elote</div><div class="d">street corn, all the way</div></div><div class="p">$5.00</div></div>
+      <div class="item"><div><div class="n">Aguas Frescas</div><div class="d">horchata • jamaica • tamarindo</div></div><div class="p">$3.75</div></div>
+      <div class="item"><div><div class="n">Churros (4)</div><div class="d">with cajeta for dipping</div></div><div class="p">$6.00</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="wrap">
+    <h2>Why the line's out the door</h2><div class="under"></div>
+    <div class="cards">
+      <div class="fcard"><div class="emoji">🫓</div><h3>Tortillas to order</h3><p>Pressed and cooked when you order, not before.</p></div>
+      <div class="fcard"><div class="emoji">🍖</div><h3>Overnight birria</h3><p>12 hours low and slow. That's the secret. That's it.</p></div>
+      <div class="fcard"><div class="emoji">🌶️</div><h3>Salsa bar</h3><p>Six house salsas, mild to “sign a waiver.”</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <h2>Find us</h2><div class="under"></div>
+    <div class="visit">
+      <div class="vcard">
+        <h3>HOURS</h3>
+        <table>
+          <tr><td>Mon – Thu</td><td>11am – 9pm</td></tr>
+          <tr><td>Fri – Sat</td><td>11am – 2am</td></tr>
+          <tr><td>Sunday</td><td>10am – 8pm</td></tr>
+        </table>
+        <p style="margin-top:14px;font-size:.92rem">Call-in orders: <b>(555) 014-3377</b></p>
+      </div>
+      <div class="vcard">
+        <h3>LOCATION</h3>
+        <b>88 Mercado Ave</b>
+        <p style="font-size:.9rem;color:#7a5a4a">Free lot behind the building</p>
+        <div class="map">[ Live Google Map embeds here ]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="font-weight:900">TAQUERÍA <span style="color:var(--yellow)">DEL SOL</span></div>
+  © 2026 Taquería Del Sol — Demo site by Blankd Web Studio
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+[
+  {"query": "nintendo switch lite", "max_buy": 100, "min_profit": 25},
+  {"query": "dewalt 20v drill combo", "max_buy": 120, "min_profit": 30},
+  {"query": "airpods pro 2nd generation", "max_buy": 90, "min_profit": 25},
+  {"query": "graphing calculator ti-84", "max_buy": 60, "min_profit": 20}
+]

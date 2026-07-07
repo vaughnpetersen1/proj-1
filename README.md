@@ -15,11 +15,14 @@ Read **[PLAN.md](PLAN.md)** for the full strategy, budget, and week-by-week play
 PLAN.md                     The business plan — start here
 service/
   site/index.html           Your sales landing page (deploy free on GitHub Pages/Netlify)
-  demos/barber.html          Demo site #1 — barbershop
-  demos/detailing.html       Demo site #2 — auto detailing
+  demos/                     Demo sites: barber, detailing, taqueria, landscaping
   outreach/templates.md      Cold DM/email/text scripts + who to target + follow-up cadence
+  outreach/leads.csv         Your lead list — every business you find goes here
+  outreach/pipeline.py       Run daily: tells you exactly who to message/follow up today
+  INTAKE.md                  Checklist for when a client says yes
 flipfinder/
   flipfinder.py              The deal scanner (runs in --mock mode with zero setup)
+  watchlist.json             Your saved searches — scan them all with --watchlist
   README.md                  Setup guide incl. free eBay developer keys
 tracker/
   ledger.csv                 Every dollar in/out gets a row
