@@ -103,3 +103,29 @@ Liam's: use the detailing demo:
 - Follow-ups: run `python3 service/outreach/pipeline.py` daily — it tells you who's due.
 - **Anyone replies with interest → tell me the business immediately.** I'll have a
   personalized mockup ready the same day. That's the close.
+
+---
+
+## ✅ VERIFIED #4 — Eden Landscape (Brainerd — FB DM to Skylar, or text (218) 650-0056)
+
+*Boss-sourced lead, verified 2026-07-08: no website — FB page, Nextdoor, Yelp stub,
+and a Chamber directory listing only. Owner is Skylar. High-ticket hardscape work
+(patios, retaining walls, fire pits) + winter pivot to TILE/LVP/hardwood flooring.
+Angle: his jobs are $5k+, his "Call Us Today" posts show he wants leads, and a
+website works his pitch 24/7 — including the winter flooring switch his FB bio
+has to explain in a paragraph.*
+
+> Hey Skylar! Came across Eden Landscape on Facebook — that paver walkway you
+> posted this week is clean work. Noticed something though: when people Google
+> "hardscape Brainerd," you don't show up with a website — Yardcreations and
+> Landsburg do, and they're pulling the searchers your posts never reach.
+>
+> I build sites for landscape companies: $300 flat, live in 48 hours. Yours
+> would show the patio/wall/fire-pit work front and center, and switch to
+> pushing your tile & LVP flooring every winter — same site, both seasons,
+> so you're never re-explaining the pivot in a Facebook bio.
+>
+> Here's my work for a landscaper: [demo link]
+>
+> Want me to mock up an Eden Landscape version with your actual project photos?
+> Free — if you don't love it, you keep the mockup and I disappear.
