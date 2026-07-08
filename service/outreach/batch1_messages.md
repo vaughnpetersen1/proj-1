@@ -1,5 +1,9 @@
 # Batch 1 — Ready-to-send messages (Minneapolis + Brainerd)
 
+**Voice rule (boss's note, 2026-07-08):** these read like a text from a real
+person, not a marketing email. Short sentences. No perfect corporate polish.
+Clean and to the point. If a line sounds like a brochure, cut it.
+
 19 leads loaded in `leads.csv`. The 3 marked **VERIFIED** are safe to send today.
 The rest need a 30-second Google ("business name + city") to confirm no website —
 search results can be stale, and telling someone with a site that they don't have
@@ -15,55 +19,51 @@ one burns the lead.
 
 ### 1. Twiins BarberShop (Minneapolis — FB DM)
 
-> Hey Twiins! Found you guys while looking at barbershops on 38th St — solid
-> following, but I noticed there's no website when people Google you, just the
-> Facebook page. I build sites for barbershops: $300 flat, live in 48 hours,
-> and it puts you in front of everyone searching "barber near me" in south
-> Minneapolis instead of just people who already follow you.
+> Hey, quick one. I was looking up barbershops in south Minneapolis and
+> realized you guys don't have a website, just the FB page. So anyone
+> googling "barber near me" around 38th is finding other shops first.
 >
-> Here's one I built for a barbershop: [demo link]
+> I build websites for barbershops. $300 flat, done in 48 hours.
+> Here's my work: [demo link]
 >
-> Want me to mock up a Twiins version? Free, no strings — if you like it,
-> it's yours for $300.
+> Honestly I already started putting a Twiins version together because your
+> before/after posts are exactly the kind of thing that should be on a
+> website. Want me to send it over? Free to look, no catch.
+
+*(True statement — the mockup exists at `service/clients/twiins-barbershop/`.
+Once his photos are in, send the screenshot WITH this message.)*
 
 ### 2. Xtreme Lawn Care LLC (Baxter — FB DM or text (218) 851-2589)
 
-> Hi! Came across Xtreme Lawn Care looking at lawn services in the Baxter area —
-> saw you do everything from grass to snow, but when people Google lawn care in
-> Baxter you don't come up with a website like some competitors do (Elevated,
-> Supreme Lawn etc. all have sites). I build websites for lawn companies:
-> $300 flat, done in 48 hours — service list, plans, and a "text us your yard"
-> quote button.
+> Hey, found your page looking at lawn care around Baxter. You guys do
+> everything from grass to snow but there's no website, and Elevated and
+> Supreme Lawn both have one. So they're getting everyone who googles
+> instead of scrolling Facebook.
 >
-> Example of my work for a landscaper: [demo link]
+> I build sites for lawn companies. $300 flat, done in 48 hours. One page
+> with your services, your plans, and a "text us your yard for a quote"
+> button. Here's an example: [demo link]
 >
-> Happy to mock up an Xtreme version free so you can see it before spending a dime.
-> Interested?
+> Want me to mock one up for Xtreme for free so you can see it first?
+> If it's not for you, no worries.
 
 *(Note: this one has real teeth — their direct competitors DO have websites.)*
 
-### 3. Cut Right Lawn Care (Brainerd — email Kaylarauen@gmail.com) — UPGRADE pitch
+### 3. Cut Right Lawn Care (Brainerd — FB DM to CutRightLC, or email Kaylarauen@gmail.com) — UPGRADE pitch
 
-Subject: **your Jobber site vs. what $300 gets you**
-
-> Hi Kayla,
+> Hey Kayla, found Cut Right while poking around lawn care pages in Brainerd.
+> Not sure if it's on your radar but your website is still on Jobber's domain
+> (the jobbersites.com link). It works, but it looks like every other Jobber
+> template and the address isn't even yours.
 >
-> Found Cut Right while looking at lawn care in the Brainerd Lakes area. You've
-> got the Jobber-generated site (cutrightlawncare.jobbersites.com) — it works,
-> but it looks like every other Jobber site, it's on their domain instead of
-> yours, and it's thin on the stuff that wins jobs (plans, pricing, photos).
+> I build custom sites for lawn companies. $300 flat, on your own domain,
+> done in about 2 days. All your Jobber booking links keep working, the new
+> site just gets more people to click them.
 >
-> I build custom sites for lawn companies: $300 flat, live in 48 hours, on your
-> own domain (cutrightlawncare.com looks a lot better on a truck decal). Your
-> Jobber booking links still work — the new site just makes people click them
-> more often.
+> Here's one I did for a landscaping company: [demo link]
 >
-> Here's an example: [demo link]
->
-> Want a free mockup of a Cut Right homepage? If you don't love it, delete this
-> email and keep the mockup.
->
-> [Your name] — Blankd Web Studio
+> If you're even a little curious I'll mock up a Cut Right homepage for free
+> so you can actually see it before deciding anything. No pressure either way.
 
 ---
 
