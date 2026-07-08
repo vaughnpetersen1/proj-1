@@ -15,7 +15,7 @@
   .logo{font-weight:800;font-size:1.15rem;color:var(--deep)}
   .logo span{color:var(--sun)}
   nav a.cta{background:var(--green);color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;font-weight:700;font-size:.92rem}
-  .hero{background:linear-gradient(rgba(28,66,42,.78),rgba(28,66,42,.88)),repeating-linear-gradient(90deg,#2b5c39 0 90px,#2e6b3f 90px 180px);color:#fff;padding:100px 22px;text-align:center}
+  .hero{background:linear-gradient(rgba(20,48,31,.72),rgba(17,41,26,.82)),url('https://images.pexels.com/photos/7546775/pexels-photo-7546775.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover,repeating-linear-gradient(90deg,#2b5c39 0 90px,#2e6b3f 90px 180px);color:#fff;padding:110px 22px;text-align:center}
   .hero .badge{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:6px 16px;border-radius:99px;font-size:.85rem;font-weight:700;margin-bottom:22px}
   .hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800;line-height:1.12}
   .hero h1 em{font-style:normal;color:var(--sun)}
@@ -35,6 +35,13 @@
   .svc h3{font-size:1.1rem;margin-bottom:6px;color:var(--deep)}
   .svc p{font-size:.93rem;color:var(--mut)}
   .svc .from{margin-top:14px;font-weight:800;color:var(--green);font-size:.95rem}
+  .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .proj{position:relative;margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#dcebde,#c3dcc8);min-height:250px}
+  .proj img{display:block;width:100%;height:280px;object-fit:cover}
+  .proj figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 14px;background:linear-gradient(transparent,rgba(16,34,22,.85));color:#fff;font-size:.9rem;font-weight:600}
+  .proj.wide{grid-column:span 2}
+  .proj.wide img{height:320px}
+  @media(max-width:680px){.proj.wide{grid-column:span 1}.proj.wide img{height:280px}}
   .band{background:var(--deep);color:#fff;text-align:center;padding:60px 22px}
   .band h2{color:#fff}
   .band .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;max-width:860px;margin:40px auto 0}
@@ -84,6 +91,35 @@
       <div class="svc"><div class="ico">🧱</div><h3>Hardscapes</h3><p>Patios, walkways, retaining walls, fire pits.</p><div class="from">custom quote</div></div>
       <div class="svc"><div class="ico">🌳</div><h3>Shrub & Tree Care</h3><p>Pruning, shaping, small removals.</p><div class="from">from $95</div></div>
       <div class="svc"><div class="ico">❄️</div><h3>Snow Removal</h3><p>Driveways & walks cleared by 7am. Seasonal contracts.</p><div class="from">from $350/season</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="padding-top:0">
+  <div class="wrap">
+    <h2>Recent work</h2>
+    <p class="sub">Real yards, real results — most projects photographed the day we wrapped.</p>
+    <div class="projects">
+      <figure class="proj wide">
+        <img src="https://images.pexels.com/photos/5178034/pexels-photo-5178034.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Full property with fresh-cut lawn and landscaping" loading="lazy" onerror="this.remove()">
+        <figcaption>Full-property maintenance — weekly mow, edge &amp; bed care</figcaption>
+      </figure>
+      <figure class="proj">
+        <img src="https://images.pexels.com/photos/166674/pexels-photo-166674.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Front yard lawn and landscaping at a family home" loading="lazy" onerror="this.remove()">
+        <figcaption>Front yard refresh — lawn renovation &amp; edging</figcaption>
+      </figure>
+      <figure class="proj">
+        <img src="https://images.pexels.com/photos/7728869/pexels-photo-7728869.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Planting new garden beds by hand" loading="lazy" onerror="this.remove()">
+        <figcaption>New plantings &amp; seasonal bed installs</figcaption>
+      </figure>
+      <figure class="proj">
+        <img src="https://images.pexels.com/photos/169523/pexels-photo-169523.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Hand-planting shrubs in fresh soil" loading="lazy" onerror="this.remove()">
+        <figcaption>Shrub &amp; tree planting, done by hand</figcaption>
+      </figure>
+      <figure class="proj">
+        <img src="https://images.pexels.com/photos/7546775/pexels-photo-7546775.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Backyard lawn mowed with clean stripes" loading="lazy" onerror="this.remove()">
+        <figcaption>Backyard cut with clean stripes</figcaption>
+      </figure>
     </div>
   </div>
 </section>
