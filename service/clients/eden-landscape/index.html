@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eden Landscape — Hardscapes, Patios & Retaining Walls | Brainerd Lakes</title>
+<meta name="description" content="Eden Landscape builds paver patios, walkways, retaining walls and fire pits in the Brainerd Lakes area. Winter tile, LVP and hardwood flooring. Call (218) 650-0056.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#26492f; --green2:#1b3622; --stone:#8a7355; --gold:#c9a227; --gold2:#a8871e;
+    --cream:#faf7f0; --ink:#24291f; --muted:#6d7263; --line:#e6dfd2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65}
+  h1,h2,h3,.disp{font-family:'Outfit','Inter',sans-serif}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+
+  header{background:var(--green);color:#fff;position:sticky;top:0;z-index:20}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+  .logo{font-family:'Outfit';font-weight:800;font-size:1.15rem;letter-spacing:.05em}
+  .logo .lion{color:var(--gold)}
+  nav a.call{background:var(--gold);color:var(--green2);text-decoration:none;padding:10px 20px;border-radius:8px;font-weight:800;font-size:.9rem}
+
+  .hero{position:relative;color:#fff;padding:120px 22px 100px;text-align:center;
+        background:linear-gradient(rgba(27,54,34,.72),rgba(23,45,29,.85)),url('https://images.pexels.com/photos/2224956/pexels-photo-2224956.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover,var(--green2)}
+  .hero .crest{display:inline-block;border:2px solid var(--gold);color:var(--gold);padding:7px 20px;font-family:'Outfit';font-weight:700;font-size:.82rem;letter-spacing:.22em;margin-bottom:24px}
+  .hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:800;line-height:1.08;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--gold)}
+  .hero p{max-width:540px;margin:20px auto 0;color:#d7e2d3;font-size:1.12rem}
+  .hero .btns{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 32px;border-radius:9px;font-weight:800;text-decoration:none;font-size:.98rem;transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.gold{background:var(--gold);color:var(--green2)}
+  .btn.line{border:2px solid rgba(255,255,255,.75);color:#fff}
+
+  .bar{background:var(--green2);color:#fff;text-align:center;padding:12px;font-size:.92rem;font-weight:600}
+  .bar a{color:var(--gold);text-decoration:none;font-weight:800}
+
+  section{padding:78px 0}
+  .kicker{font-family:'Outfit';font-size:.8rem;font-weight:700;letter-spacing:.2em;color:var(--gold2);text-align:center;margin-bottom:10px}
+  h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;text-align:center;color:var(--green2)}
+  .sub{text-align:center;color:var(--muted);max-width:560px;margin:12px auto 46px}
+
+  .svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .svc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;box-shadow:0 3px 16px rgba(40,50,35,.05)}
+  .svc .ico{font-size:2.1rem;margin-bottom:12px}
+  .svc h3{font-size:1.1rem;margin-bottom:6px;color:var(--green2)}
+  .svc p{color:var(--muted);font-size:.93rem}
+
+  .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .proj{position:relative;margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#e4ddcd,#d2c6ab);min-height:240px}
+  .proj img{display:block;width:100%;height:290px;object-fit:cover}
+  .proj figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 14px;background:linear-gradient(transparent,rgba(24,36,24,.88));color:#fff;font-size:.9rem;font-weight:600}
+  .swapnote{text-align:center;color:var(--muted);font-size:.85rem;margin-top:18px}
+
+  .winter{background:linear-gradient(135deg,#1d2c3d,#16222f);color:#fff;text-align:center;padding:76px 22px;position:relative;overflow:hidden}
+  .winter .flake{position:absolute;font-size:5rem;opacity:.08}
+  .winter h2{color:#fff}
+  .winter .kicker{color:#7fb3e0}
+  .winter p.lead{max-width:560px;margin:14px auto 40px;color:#b9cbdd}
+  .wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:880px;margin:0 auto}
+  .wcard{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:26px}
+  .wcard .ico{font-size:2rem;margin-bottom:10px}
+  .wcard h3{font-size:1.02rem;margin-bottom:4px}
+  .wcard p{font-size:.88rem;color:#a9bccf}
+
+  .trust{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;padding:26px 22px;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--muted);font-size:.93rem}
+  .trust b{color:var(--green2)}
+
+  .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;max-width:880px;margin:0 auto}
+  .ccard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:32px;box-shadow:0 3px 16px rgba(40,50,35,.05)}
+  .ccard h3{color:var(--gold2);font-size:.92rem;letter-spacing:.15em;margin-bottom:14px}
+  .ccard .big{font-family:'Outfit';font-size:1.3rem;font-weight:700;color:var(--green2)}
+  .ccard p{color:var(--muted);font-size:.95rem}
+  .ccard a{color:var(--green2);font-weight:700;text-decoration:none}
+  .ccard .row{padding:9px 0;border-bottom:1px solid var(--line)}
+  .ccard .row:last-child{border:none}
+
+  .cta-final{color:#fff;text-align:center;padding:88px 22px;
+             background:linear-gradient(rgba(38,73,47,.85),rgba(27,54,34,.92)),url('https://images.pexels.com/photos/20381753/pexels-photo-20381753.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover,var(--green)}
+  .cta-final h2{color:#fff;font-size:clamp(1.9rem,5vw,2.9rem)}
+  .cta-final p{margin:14px auto 30px;max-width:460px;color:#d7e2d3}
+
+  footer{background:var(--green2);color:#9db3a0;text-align:center;padding:38px 22px;font-size:.85rem}
+  footer .logo{color:#fff;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><nav>
+  <div class="logo"><span class="lion">🦁</span> EDEN LANDSCAPE</div>
+  <a class="call" href="tel:2186500056">☎ (218) 650-0056</a>
+</nav></div></header>
+
+<div class="hero">
+  <div class="crest disp">BRAINERD LAKES AREA</div>
+  <h1>Outdoor spaces built<br>to <em>outlast the house.</em></h1>
+  <p>Paver patios, walkways, retaining walls and fire pits — built right the first time by a crew that treats your yard like their own.</p>
+  <div class="btns">
+    <a class="btn gold" href="tel:2186500056">Call for a quote</a>
+    <a class="btn line" href="https://wa.me/12186500056">💬 WhatsApp us</a>
+  </div>
+</div>
+
+<div class="bar">📍 Serving Brainerd, Baxter &amp; the Lakes Area &nbsp;·&nbsp; <a href="tel:2186500056">(218) 650-0056</a></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="kicker">APRIL — NOVEMBER</div>
+    <h2>Hardscape &amp; Landscape</h2>
+    <p class="sub">From tearing out the old yard to laying the last paver — one crew, start to finish.</p>
+    <div class="svcs">
+      <div class="svc"><div class="ico">🧱</div><h3>Paver Patios &amp; Walkways</h3><p>Entryways, pool decks and backyard patios that stay level through Minnesota winters.</p></div>
+      <div class="svc"><div class="ico">🪨</div><h3>Retaining &amp; Boulder Walls</h3><p>Function first, then looks — walls that hold their grade for decades.</p></div>
+      <div class="svc"><div class="ico">🔥</div><h3>Fire Pits</h3><p>Built-in stone fire pits that turn a backyard into the place everyone ends up.</p></div>
+      <div class="svc"><div class="ico">🚜</div><h3>Site Prep &amp; Grading</h3><p>Skid steer work, drainage correction and drain tile before problems become projects.</p></div>
+      <div class="svc"><div class="ico">🌊</div><h3>Lakeshore Work</h3><p>Steps, paths and stonework that make getting to the water the best part.</p></div>
+      <div class="svc"><div class="ico">❄️</div><h3>Snow Removal</h3><p>Driveways and lots cleared all winter for homes and businesses.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">THE PORTFOLIO</div>
+    <h2>Recent Projects</h2>
+    <p class="sub">Stone that looks this good on day one and better in year ten.</p>
+    <div class="projects">
+      <figure class="proj">
+        <img src="https://images.pexels.com/photos/2224956/pexels-photo-2224956.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Stone walkway through landscaped garden" loading="lazy" onerror="this.remove()">
+        <figcaption>Natural stone walkway install</figcaption>
+      </figure>
+      <figure class="proj">
+        <img src="https://images.pexels.com/photos/20381753/pexels-photo-20381753.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Stone path with clean edging" loading="lazy" onerror="this.remove()">
+        <figcaption>Paver path &amp; edging</figcaption>
+      </figure>
+      <figure class="proj">
+        <img src="https://images.pexels.com/photos/5178034/pexels-photo-5178034.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Finished property with new landscaping" loading="lazy" onerror="this.remove()">
+        <figcaption>Full property transformation</figcaption>
+      </figure>
+    </div>
+    <p class="swapnote">[ Preview note: these are stand-in photos — your real project photos from the Facebook page go here at launch ]</p>
+  </div>
+</section>
+
+<div class="winter">
+  <div class="flake" style="top:8%;left:4%">❄</div>
+  <div class="flake" style="bottom:10%;right:6%">❄</div>
+  <div class="kicker">DECEMBER — MARCH</div>
+  <h2>When the ground freezes, we move inside.</h2>
+  <p class="lead">Same crew, same standards — winter is flooring season. Book your indoor project for the months your yard is under snow.</p>
+  <div class="wgrid">
+    <div class="wcard"><div class="ico">🚿</div><h3>Tile Showers</h3><p>Custom tile work, waterproofed right.</p></div>
+    <div class="wcard"><div class="ico">🪵</div><h3>Hardwood &amp; LVP</h3><p>Floors installed clean, straight and fast.</p></div>
+    <div class="wcard"><div class="ico">🔥</div><h3>Fireplace Surrounds</h3><p>Stone and tile work, inside the house too.</p></div>
+  </div>
+</div>
+
+<div class="trust">
+  <div>🤝 <b>Brainerd Lakes Chamber</b> member</div>
+  <div>📍 <b>Local</b> — based on 9th St in Brainerd</div>
+  <div>📞 <b>Owner answers</b> the phone</div>
+</div>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="kicker">GET A QUOTE</div>
+    <h2>Tell us about your project</h2>
+    <p class="sub">Call, text or WhatsApp a photo of your space — we'll get you a real number fast.</p>
+    <div class="contact">
+      <div class="ccard">
+        <h3 class="disp">REACH SKYLAR</h3>
+        <div class="row">☎ <a href="tel:2186500056">(218) 650-0056</a></div>
+        <div class="row">💬 <a href="https://wa.me/12186500056">WhatsApp</a></div>
+        <div class="row">✉ <a href="mailto:skylarprice400@gmail.com">skylarprice400@gmail.com</a></div>
+        <div class="row">📘 <a href="https://www.facebook.com/eden.landscape.2025/">Facebook — see latest projects</a></div>
+      </div>
+      <div class="ccard">
+        <h3 class="disp">BASED IN</h3>
+        <div class="big">514 9th St S</div>
+        <p>Brainerd, MN 56401</p>
+        <p style="margin-top:12px">Hardscape season books up fast — spring slots go first. Winter flooring installs booked year-round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-final">
+  <h2>Let's build your Eden.</h2>
+  <p>One call gets the project moving — and the quote costs nothing.</p>
+  <a class="btn gold" href="tel:2186500056">☎ (218) 650-0056</a>
+</div>
+
+<footer>
+  <div class="logo disp"><span style="color:var(--gold)">🦁</span> EDEN LANDSCAPE</div>
+  514 9th St S, Brainerd, MN 56401 · (218) 650-0056<br><br>
+  Site preview built for Eden Landscape by Blankd Web Studio — $300 flat · live in 48 hours
+</footer>
+
+</body>
+</html>
