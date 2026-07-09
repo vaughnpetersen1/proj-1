@@ -1,6 +1,14 @@
 [
-  {"query": "nintendo switch lite", "max_buy": 100, "min_profit": 25},
-  {"query": "dewalt 20v drill combo", "max_buy": 120, "min_profit": 30},
+  {"query": "milwaukee m18 impact driver", "max_buy": 90, "min_profit": 30},
+  {"query": "dewalt 20v max combo kit", "max_buy": 120, "min_profit": 35},
+  {"query": "milwaukee m18 battery 5.0ah", "max_buy": 50, "min_profit": 20},
+  {"query": "dewalt 12 sliding miter saw", "max_buy": 120, "min_profit": 40},
+  {"query": "makita lxt impact driver", "max_buy": 80, "min_profit": 25},
   {"query": "airpods pro 2nd generation", "max_buy": 90, "min_profit": 25},
-  {"query": "graphing calculator ti-84", "max_buy": 60, "min_profit": 20}
+  {"query": "nintendo switch oled", "max_buy": 120, "min_profit": 30},
+  {"query": "sony wh-1000xm4 headphones", "max_buy": 80, "min_profit": 25},
+  {"query": "thinkpad t480", "max_buy": 100, "min_profit": 30},
+  {"query": "ti-84 plus ce calculator", "max_buy": 45, "min_profit": 20},
+  {"query": "autel obd2 scanner", "max_buy": 80, "min_profit": 25},
+  {"query": "noco boost jump starter", "max_buy": 60, "min_profit": 20}
 ]
