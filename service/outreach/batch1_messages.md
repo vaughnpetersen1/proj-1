@@ -1,4 +1,4 @@
-# Batch 1 — 7 verified no-website leads, ready to send
+# Batch 1 — 8 leads, ready to send
 
 **Voice rule (boss's note, 2026-07-08):** these read like a text from a real
 person, not a marketing email. Short sentences. No perfect corporate polish.
@@ -111,6 +111,27 @@ send: set status to `contacted` in leads.csv, update `last_touch`, run
 >
 > Want a free mockup for El Paisa? Free to look, and the menu alone will
 > make people hungry.
+
+### 8. MN Detail CO. (Lane Evans) — FB DM or text (507) 430-3960
+Link: /demos/detailing.html · boss-picked lead, Redwood Falls
+
+> Hey Lane, found MN Detail Co on Facebook — the ceramic coating work looks
+> sharp. But I gotta be honest, I clicked your website link and it goes to
+> that app.urable.com booking page. That's a checkout counter, not a website.
+> Google can't find it, it doesn't show off your work, and the link even
+> looks sketchy when people tap it from Facebook.
+>
+> Here's the thing — you already own mndetailco.com, it's literally in your
+> email address. There's just no site on it.
+>
+> I build websites for detailers. $300 flat, done in 48 hours, on your own
+> domain. Your coating and correction work front and center, your packages,
+> and every "book now" button goes straight into your Urable page — so
+> nothing about how you take bookings changes, people just actually find
+> you first.
+>
+> Want me to mock up an MN Detail Co version for free so you can see it?
+> If you don't like it you've lost nothing.
 
 ---
 
