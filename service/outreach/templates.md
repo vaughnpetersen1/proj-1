@@ -101,3 +101,26 @@ Then stop. Three touches, done. They go on the "re-ping in 3 months" list.
 - **Tue–Thu:** send 3–4 first-touch messages/day
 - **Fri:** send all due follow-ups
 - **Always:** log sends + replies so we can compute the actual close rate at month-end
+
+---
+
+## The lead machine (added 2026-07-10)
+
+Two scripts now automate the grunt work:
+
+1. **`leadfinder.py`** — searches Google Maps (official Places API) for a
+   niche + city and keeps only businesses with NO website on their profile.
+   `python3 leadfinder.py "barbershop in Duluth MN"` → found_leads.csv
+
+   **API key setup (~10 min, free at our volume):**
+   - console.cloud.google.com → create project → enable "Places API (New)"
+   - Credentials → Create API key → `export GOOGLE_PLACES_API_KEY=...`
+   - Google's free monthly credit covers thousands of searches; we use dozens.
+
+2. **`generate_messages.py`** — merges every found lead into the right
+   niche template and writes ready-to-paste messages to outbox.md.
+
+**What stays human, on purpose:** the 30-second verify per lead, and YOUR
+thumb on the send button. No auto-sending — automated DM blasts violate
+platform rules, risk the (paid, verified) account, and convert worse than
+the personal touch that's already getting replies.
