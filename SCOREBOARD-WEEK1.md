@@ -12,8 +12,8 @@ down next to the excuses, and both get read at month-end.
 | 2 | blankd.online connected + demos live | pending |
 | 3 | Business posted on personal socials with "tag a business owner" ask | pending |
 | 4 | Saturday follow-ups sent w/ screenshots (Skylar, Lane, 512, Shine Time) | pending |
-| 5 | eBay live + first real `--watchlist` scan run | pending |
-| 6 | First flip bought at ≤$140 (fridge or better) OR consciously passed | negotiating |
+| 5 | eBay live + first real `--watchlist` scan run | eBay LIVE - scan pending |
+| 6 | First flip bought at ≤$140 (fridge or better) OR consciously passed | DONE - $140, listed on FB |
 | 7 | Every dollar in/out logged in ledger same-day | on track |
 
 ## Claude's targets (boss grades me on these Sunday)
