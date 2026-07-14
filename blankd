@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blankd Web Studio — Your Website, Live in 48 Hours. $300 Flat.</title>
+<meta name="description" content="Professional websites for local businesses. $300 flat rate, live in 48 hours. No agencies, no $2,500 quotes, no monthly surprises.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090f; --panel:#0e1118; --panel2:#141824; --line:#222839; --line2:#2e3650;
+    --text:#eceef4; --muted:#98a0b3; --accent:#5b8cff; --accent2:#8b6bff; --good:#3ecf8e;
+    --grad:linear-gradient(92deg,#5b8cff,#8b6bff 55%,#c86bff);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blankd Web Studio — Your Website, Live in 48 Hours. $300 Flat.</title>
+<meta name="description" content="Professional websites for local businesses. $300 flat rate, live in 48 hours. No agencies, no $2,500 quotes, no monthly surprises.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090f; --panel:#0e1118; --panel2:#141824; --line:#222839; --line2:#2e3650;
+    --text:#eceef4; --muted:#98a0b3; --accent:#5b8cff; --accent2:#8b6bff; --good:#3ecf8e;
+    --grad:linear-gradient(92deg,#5b8cff,#8b6bff 55%,#c86bff);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+  h1,h2,h3,.logo{font-family:'Sora','Inter',sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  header{position:sticky;top:0;background:rgba(8,9,15,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:20}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{font-weight:800;font-size:1.1rem;letter-spacing:.06em}
+  .logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s}
+  .navlinks a:hover{color:var(--text)}
+  .navlinks a.cta{background:var(--grad);color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;box-shadow:0 4px 24px rgba(91,140,255,.35)}
+  @media(max-width:640px){.navlinks a:not(.cta){display:none}}
+
+  .hero{position:relative;padding:110px 0 80px;text-align:center}
+  .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none}
+  .orb.one{width:480px;height:480px;background:#3757ff;top:-160px;left:-140px}
+  .orb.two{width:420px;height:420px;background:#7a3bff;top:-60px;right:-160px;opacity:.28}
+  .hero>*{position:relative}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line2);color:var(--good);padding:7px 16px;border-radius:99px;font-size:.85rem;font-weight:600;margin-bottom:28px}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.4}}
+  .hero h1{font-size:clamp(2.3rem,5.8vw,3.9rem);line-height:1.08;font-weight:800;letter-spacing:-.025em}
+  .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{max-width:580px;margin:24px auto 0;color:var(--muted);font-size:1.18rem}
+  .actions{margin-top:40px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:15px 30px;border-radius:12px;font-weight:700;text-decoration:none;font-size:1rem;transition:transform .18s,box-shadow .18s}
+  .btn:hover{transform:translateY(-3px)}
+  .btn.primary{background:var(--grad);color:#fff;box-shadow:0 8px 32px rgba(107,107,255,.4)}
+  .btn.primary:hover{box-shadow:0 12px 44px rgba(107,107,255,.55)}
+  .btn.ghost{border:1px solid var(--line2);color:var(--text);background:rgba(20,24,36,.6)}
+
+  .strip{display:flex;justify-content:center;gap:0;flex-wrap:wrap;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;margin-top:70px}
+  .strip>div{flex:1;min-width:150px;text-align:center;padding:22px 18px;border-right:1px solid var(--line)}
+  .strip>div:last-child{border-right:none}
+  .strip b{display:block;font-family:'Sora';font-size:1.5rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .strip span{color:var(--muted);font-size:.88rem}
+
+  section{padding:92px 0}
+  .kicker{font-size:.8rem;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:12px}
+  h2{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+  .sub{color:var(--muted);max-width:620px;margin-bottom:48px;font-size:1.05rem}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:30px;transition:border-color .25s,transform .25s}
+  .card:hover{border-color:var(--line2)}
+  .num{display:inline-block;font-family:'Sora';font-size:.8rem;font-weight:700;background:var(--panel2);border:1px solid var(--line2);color:var(--accent);padding:4px 12px;border-radius:8px;margin-bottom:16px;letter-spacing:.1em}
+  .card h3{font-size:1.18rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.97rem}
+
+  .work .card{padding:0;overflow:hidden;text-decoration:none;display:block}
+  .work .card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 18px 48px rgba(0,0,0,.5)}
+  .thumb{height:172px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;border-bottom:1px solid var(--line);position:relative}
+  .thumb::after{content:"VIEW DEMO →";position:absolute;bottom:10px;right:14px;font-size:.68rem;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.55)}
+  .thumb.a{background:linear-gradient(135deg,#1c1305,#2a1e09)}
+  .thumb.b{background:linear-gradient(135deg,#051423,#082436)}
+  .thumb.c{background:linear-gradient(135deg,#230b08,#33130c)}
+  .thumb.d{background:linear-gradient(135deg,#07200f,#0c2e18)}
+  .work .meta{padding:22px 26px}
+  .work .meta h3{color:var(--text);font-size:1.08rem}
+  .work .meta p{color:var(--muted);font-size:.9rem;margin-top:4px}
+
+  .compare{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .compare .row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;align-items:center}
+  .compare .row>div{padding:16px 20px;font-size:.95rem;border-bottom:1px solid var(--line)}
+  .compare .row:last-child>div{border-bottom:none}
+  .compare .head>div{background:var(--panel2);font-family:'Sora';font-weight:700;font-size:.9rem}
+  .compare .row>div:first-child{color:var(--muted)}
+  .compare .us{background:rgba(91,140,255,.07)}
+  .compare .head .us{color:var(--accent)}
+  .yes{color:var(--good);font-weight:700}
+  .no{color:#e0616f;font-weight:600}
+  .meh{color:var(--muted)}
+  @media(max-width:700px){.compare .row{grid-template-columns:1.2fr 1fr 1fr}.compare .row>div.hide-sm{display:none}}
+
+  .price-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;max-width:780px;margin:0 auto}
+  .price{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:40px 34px;text-align:center;position:relative}
+  .price.featured{border:1px solid transparent;background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--grad) border-box;box-shadow:0 20px 60px rgba(91,110,255,.18)}
+  .price.featured .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.12em;padding:5px 14px;border-radius:99px}
+  .price h3{font-size:1.05rem;color:var(--muted);letter-spacing:.06em}
+  .amount{font-family:'Sora';font-size:3.4rem;font-weight:800;margin:12px 0 2px}
+  .amount small{font-size:1.1rem;color:var(--muted);font-weight:600}
+  .per{color:var(--muted);font-size:.88rem}
+  .price ul{list-style:none;text-align:left;margin:28px 0;color:var(--muted)}
+  .price li{padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .price li::before{content:"✓";color:var(--good);font-weight:700;margin-right:10px}
+  .price li:last-child{border:none}
+
+  .faq .card{margin-bottom:14px}
+  .faq h3{font-size:1.05rem}
+
+  .final{text-align:center;position:relative;border:1px solid var(--line2);border-radius:24px;padding:76px 32px;overflow:hidden;background:var(--panel)}
+  .final .orb{width:420px;height:420px;background:#4a5fff;bottom:-260px;left:50%;transform:translateX(-50%);opacity:.3}
+  .final>*{position:relative}
+  .final h2{margin-bottom:10px}
+  .final p{color:var(--muted);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+
+  footer{border-top:1px solid var(--line);padding:44px 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><nav>
+    <div class="logo">BLANKD<span>·</span>WEB</div>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#contact">Get your site →</a>
+    </div>
+  </nav></div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="orb one"></div><div class="orb two"></div>
+    <div class="badge"><span class="dot"></span> Now booking — 2 build slots this week</div>
+    <h1>Your business deserves<br>a real website. <em>$300. 48 hours.</em></h1>
+    <p>No $2,500 agency quotes. No "ready next quarter." One flat price, a site your customers can actually find, done in two days.</p>
+    <div class="actions">
+      <a class="btn primary" href="#contact">Get your site — $300</a>
+      <a class="btn ghost" href="#work">See example sites</a>
+    </div>
+    <div class="strip">
+      <div><b>$300</b><span>one flat price</span></div>
+      <div><b>48h</b><span>deposit to live</span></div>
+      <div><b>$10/mo</b><span>optional care plan</span></div>
+      <div><b>100%</b><span>mobile-first</span></div>
+    </div>
+  </div>
+
+  <section id="how" class="reveal">
+    <div class="kicker">THE PROCESS</div>
+    <h2>Three steps. Thirty minutes of your time.</h2>
+    <p class="sub">You run your business — the website part is my job, start to finish.</p>
+    <div class="grid3">
+      <div class="card"><span class="num">01</span><h3>Tell me about your business</h3><p>A quick call or text thread: your hours, services, photos, and what makes you the one to call. That's everything I need.</p></div>
+      <div class="card"><span class="num">02</span><h3>I build it in 48 hours</h3><p>Custom design — not a template with your name slapped on. Built to load fast and show up when locals search your trade.</p></div>
+      <div class="card"><span class="num">03</span><h3>You go live</h3><p>Review it, request tweaks, done. Optional $10/mo covers hosting and edits so you never think about it again.</p></div>
+    </div>
+  </section>
+
+  <section id="work" class="work reveal">
+    <div class="kicker">RECENT WORK</div>
+    <h2>Built for the business it belongs to</h2>
+    <p class="sub">Every niche gets its own look — a barbershop shouldn't feel like a law firm. Tap any card for the live demo.</p>
+    <div class="grid3">
+      <a class="card" href="demos/barber.html">
+        <div class="thumb a">💈</div>
+        <div class="meta"><h3>Fade District Barbershop</h3><p>Bookings-focused • services, pricing, hours, map</p></div>
+      </a>
+      <a class="card" href="demos/detailing.html">
+        <div class="thumb b">🚗</div>
+        <div class="meta"><h3>Mirror Finish Auto Detailing</h3><p>Package pricing • before/afters • text-for-quote</p></div>
+      </a>
+      <a class="card" href="demos/taqueria.html">
+        <div class="thumb c">🌮</div>
+        <div class="meta"><h3>Taquería Del Sol</h3><p>Menu-first • specials ticker • call-in orders</p></div>
+      </a>
+      <a class="card" href="demos/landscaping.html">
+        <div class="thumb d">🌿</div>
+        <div class="meta"><h3>Evergreen Lawn &amp; Landscape</h3><p>Service menu • monthly plans • instant quotes</p></div>
+      </a>
+    </div>
+  </section>
+
+  <section id="compare" class="reveal">
+    <div class="kicker">THE HONEST COMPARISON</div>
+    <h2>Where $300 actually lands</h2>
+    <p class="sub">You have three real options. Here's the whole picture — decide for yourself.</p>
+    <div class="compare">
+      <div class="row head"><div></div><div>Agency</div><div class="hide-sm">DIY builder</div><div class="us">Blankd</div></div>
+      <div class="row"><div>Price</div><div class="no">$2,000–5,000</div><div class="meh hide-sm">$20+/mo forever</div><div class="us yes">$300 once</div></div>
+      <div class="row"><div>Time to launch</div><div class="no">4–8 weeks</div><div class="meh hide-sm">Your weekends</div><div class="us yes">48 hours</div></div>
+      <div class="row"><div>Custom design</div><div class="yes">Yes</div><div class="no hide-sm">Template</div><div class="us yes">Yes</div></div>
+      <div class="row"><div>You do the work</div><div class="yes">No</div><div class="no hide-sm">All of it</div><div class="us yes">None</div></div>
+      <div class="row"><div>Ongoing cost</div><div class="meh">$100+/mo retainer</div><div class="meh hide-sm">$240+/yr</div><div class="us yes">$0 (or $10/mo)</div></div>
+    </div>
+  </section>
+
+  <section id="pricing" class="reveal">
+    <div class="kicker" style="text-align:center">PRICING</div>
+    <h2 style="text-align:center">Simple, honest pricing</h2>
+    <p class="sub" style="text-align:center;margin-left:auto;margin-right:auto">The price on this page is the price you pay. That's the whole point.</p>
+    <div class="price-wrap">
+      <div class="price featured">
+        <div class="tag">MOST POPULAR</div>
+        <h3>THE WEBSITE</h3>
+        <div class="amount">$300</div>
+        <div class="per">one-time, flat</div>
+        <ul>
+          <li>Custom design, built for your business</li>
+          <li>Live in 48 hours from deposit</li>
+          <li>Mobile-first &amp; fast-loading</li>
+          <li>Google Maps + click-to-call ready</li>
+          <li>Two rounds of revisions included</li>
+        </ul>
+        <a class="btn primary" href="#contact">Claim a build slot</a>
+      </div>
+      <div class="price">
+        <h3>CARE PLAN</h3>
+        <div class="amount">$10<small>/mo</small></div>
+        <div class="per">optional, cancel anytime</div>
+        <ul>
+          <li>Hosting handled — site stays online</li>
+          <li>Text me an edit, done in 24h</li>
+          <li>Hours, menu &amp; price changes anytime</li>
+          <li>You never touch a control panel</li>
+        </ul>
+        <a class="btn ghost" href="#contact">Add at delivery</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq reveal">
+    <div class="kicker">FAIR QUESTIONS</div>
+    <h2>Things you're right to ask</h2>
+    <div class="card" style="margin-top:34px"><h3>Why so much cheaper than an agency?</h3><p>No office, no account managers, no six-week "discovery phase." Just the site, built well, built fast.</p></div>
+    <div class="card"><h3>What if I don't like it?</h3><p>Two revision rounds are included, and you only pay the second half when you're happy enough to go live.</p></div>
+    <div class="card"><h3>Do I own the site?</h3><p>Yes. It's yours. The care plan is convenience, not a hostage situation — cancel anytime and take the files with you.</p></div>
+    <div class="card"><h3>What do you need from me?</h3><p>About 30 minutes: your services, hours, photos, and phone number. I handle literally everything else.</p></div>
+  </section>
+
+  <section id="contact">
+    <div class="final reveal">
+      <div class="orb"></div>
+      <h2>Two build slots open this week.</h2>
+      <p>Text or email what your business does — I'll reply the same day with exactly what your site would look like.</p>
+      <a class="btn primary" href="mailto:wearblankd@gmail.com?subject=Website%20for%20my%20business">📧 wearblankd@gmail.com</a>
+    </div>
+  </section>
+
+</div>
+
+<footer><div class="wrap">© 2026 Blankd Web Studio — $300 flat. 48 hours. That's it.</div></footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
+
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+  h1,h2,h3,.logo{font-family:'Sora','Inter',sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  header{position:sticky;top:0;background:rgba(8,9,15,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:20}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{font-weight:800;font-size:1.1rem;letter-spacing:.06em}
+  .logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s}
+  .navlinks a:hover{color:var(--text)}
+  .navlinks a.cta{background:var(--grad);color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;box-shadow:0 4px 24px rgba(91,140,255,.35)}
+  @media(max-width:640px){.navlinks a:not(.cta){display:none}}
+
+  .hero{position:relative;padding:110px 0 80px;text-align:center}
+  .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none}
+  .orb.one{width:480px;height:480px;background:#3757ff;top:-160px;left:-140px}
+  .orb.two{width:420px;height:420px;background:#7a3bff;top:-60px;right:-160px;opacity:.28}
+  .hero>*{position:relative}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line2);color:var(--good);padding:7px 16px;border-radius:99px;font-size:.85rem;font-weight:600;margin-bottom:28px}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.4}}
+  .hero h1{font-size:clamp(2.3rem,5.8vw,3.9rem);line-height:1.08;font-weight:800;letter-spacing:-.025em}
+  .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{max-width:580px;margin:24px auto 0;color:var(--muted);font-size:1.18rem}
+  .actions{margin-top:40px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:15px 30px;border-radius:12px;font-weight:700;text-decoration:none;font-size:1rem;transition:transform .18s,box-shadow .18s}
+  .btn:hover{transform:translateY(-3px)}
+  .btn.primary{background:var(--grad);color:#fff;box-shadow:0 8px 32px rgba(107,107,255,.4)}
+  .btn.primary:hover{box-shadow:0 12px 44px rgba(107,107,255,.55)}
+  .btn.ghost{border:1px solid var(--line2);color:var(--text);background:rgba(20,24,36,.6)}
+
+  .strip{display:flex;justify-content:center;gap:0;flex-wrap:wrap;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;margin-top:70px}
+  .strip>div{flex:1;min-width:150px;text-align:center;padding:22px 18px;border-right:1px solid var(--line)}
+  .strip>div:last-child{border-right:none}
+  .strip b{display:block;font-family:'Sora';font-size:1.5rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .strip span{color:var(--muted);font-size:.88rem}
+
+  section{padding:92px 0}
+  .kicker{font-size:.8rem;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:12px}
+  h2{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+  .sub{color:var(--muted);max-width:620px;margin-bottom:48px;font-size:1.05rem}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:30px;transition:border-color .25s,transform .25s}
+  .card:hover{border-color:var(--line2)}
+  .num{display:inline-block;font-family:'Sora';font-size:.8rem;font-weight:700;background:var(--panel2);border:1px solid var(--line2);color:var(--accent);padding:4px 12px;border-radius:8px;margin-bottom:16px;letter-spacing:.1em}
+  .card h3{font-size:1.18rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.97rem}
+
+  .work .card{padding:0;overflow:hidden;text-decoration:none;display:block}
+  .work .card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 18px 48px rgba(0,0,0,.5)}
+  .thumb{height:172px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;border-bottom:1px solid var(--line);position:relative}
+  .thumb::after{content:"VIEW DEMO →";position:absolute;bottom:10px;right:14px;font-size:.68rem;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.55)}
+  .thumb.a{background:linear-gradient(135deg,#1c1305,#2a1e09)}
+  .thumb.b{background:linear-gradient(135deg,#051423,#082436)}
+  .thumb.c{background:linear-gradient(135deg,#230b08,#33130c)}
+  .thumb.d{background:linear-gradient(135deg,#07200f,#0c2e18)}
+  .work .meta{padding:22px 26px}
+  .work .meta h3{color:var(--text);font-size:1.08rem}
+  .work .meta p{color:var(--muted);font-size:.9rem;margin-top:4px}
+
+  .compare{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .compare .row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;align-items:center}
+  .compare .row>div{padding:16px 20px;font-size:.95rem;border-bottom:1px solid var(--line)}
+  .compare .row:last-child>div{border-bottom:none}
+  .compare .head>div{background:var(--panel2);font-family:'Sora';font-weight:700;font-size:.9rem}
+  .compare .row>div:first-child{color:var(--muted)}
+  .compare .us{background:rgba(91,140,255,.07)}
+  .compare .head .us{color:var(--accent)}
+  .yes{color:var(--good);font-weight:700}
+  .no{color:#e0616f;font-weight:600}
+  .meh{color:var(--muted)}
+  @media(max-width:700px){.compare .row{grid-template-columns:1.2fr 1fr 1fr}.compare .row>div.hide-sm{display:none}}
+
+  .price-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;max-width:780px;margin:0 auto}
+  .price{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:40px 34px;text-align:center;position:relative}
+  .price.featured{border:1px solid transparent;background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--grad) border-box;box-shadow:0 20px 60px rgba(91,110,255,.18)}
+  .price.featured .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.12em;padding:5px 14px;border-radius:99px}
+  .price h3{font-size:1.05rem;color:var(--muted);letter-spacing:.06em}
+  .amount{font-family:'Sora';font-size:3.4rem;font-weight:800;margin:12px 0 2px}
+  .amount small{font-size:1.1rem;color:var(--muted);font-weight:600}
+  .per{color:var(--muted);font-size:.88rem}
+  .price ul{list-style:none;text-align:left;margin:28px 0;color:var(--muted)}
+  .price li{padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .price li::before{content:"✓";color:var(--good);font-weight:700;margin-right:10px}
+  .price li:last-child{border:none}
+
+  .faq .card{margin-bottom:14px}
+  .faq h3{font-size:1.05rem}
+
+  .final{text-align:center;position:relative;border:1px solid var(--line2);border-radius:24px;padding:76px 32px;overflow:hidden;background:var(--panel)}
+  .final .orb{width:420px;height:420px;background:#4a5fff;bottom:-260px;left:50%;transform:translateX(-50%);opacity:.3}
+  .final>*{position:relative}
+  .final h2{margin-bottom:10px}
+  .final p{color:var(--muted);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+
+  footer{border-top:1px solid var(--line);padding:44px 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><nav>
+    <div class="logo">BLANKD<span>·</span>WEB</div>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#contact">Get your site →</a>
+    </div>
+  </nav></div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="orb one"></div><div class="orb two"></div>
+    <div class="badge"><span class="dot"></span> Now booking — 2 build slots this week</div>
+    <h1>Your business deserves<br>a real website. <em>$300. 48 hours.</em></h1>
+    <p>No $2,500 agency quotes. No "ready next quarter." One flat price, a site your customers can actually find, done in two days.</p>
+    <div class="actions">
+      <a class="btn primary" href="#contact">Get your site — $300</a>
+      <a class="btn ghost" href="#work">See example sites</a>
+    </div>
+    <div class="strip">
+      <div><b>$300</b><span>one flat price</span></div>
+      <div><b>48h</b><span>deposit to live</span></div>
+      <div><b>$10/mo</b><span>optional care plan</span></div>
+      <div><b>100%</b><span>mobile-first</span></div>
+    </div>
+  </div>
+
+  <section id="how" class="reveal">
+    <div class="kicker">THE PROCESS</div>
+    <h2>Three steps. Thirty minutes of your time.</h2>
+    <p class="sub">You run your business — the website part is my job, start to finish.</p>
+    <div class="grid3">
+      <div class="card"><span class="num">01</span><h3>Tell me about your business</h3><p>A quick call or text thread: your hours, services, photos, and what makes you the one to call. That's everything I need.</p></div>
+      <div class="card"><span class="num">02</span><h3>I build it in 48 hours</h3><p>Custom design — not a template with your name slapped on. Built to load fast and show up when locals search your trade.</p></div>
+      <div class="card"><span class="num">03</span><h3>You go live</h3><p>Review it, request tweaks, done. Optional $10/mo covers hosting and edits so you never think about it again.</p></div>
+    </div>
+  </section>
+
+  <section id="work" class="work reveal">
+    <div class="kicker">RECENT WORK</div>
+    <h2>Built for the business it belongs to</h2>
+    <p class="sub">Every niche gets its own look — a barbershop shouldn't feel like a law firm. Tap any card for the live demo.</p>
+    <div class="grid3">
+      <a class="card" href="demos/barber.html">
+        <div class="thumb a">💈</div>
+        <div class="meta"><h3>Fade District Barbershop</h3><p>Bookings-focused • services, pricing, hours, map</p></div>
+      </a>
+      <a class="card" href="demos/detailing.html">
+        <div class="thumb b">🚗</div>
+        <div class="meta"><h3>Mirror Finish Auto Detailing</h3><p>Package pricing • before/afters • text-for-quote</p></div>
+      </a>
+      <a class="card" href="demos/taqueria.html">
+        <div class="thumb c">🌮</div>
+        <div class="meta"><h3>Taquería Del Sol</h3><p>Menu-first • specials ticker • call-in orders</p></div>
+      </a>
+      <a class="card" href="demos/landscaping.html">
+        <div class="thumb d">🌿</div>
+        <div class="meta"><h3>Evergreen Lawn &amp; Landscape</h3><p>Service menu • monthly plans • instant quotes</p></div>
+      </a>
+    </div>
+  </section>
+
+  <section id="compare" class="reveal">
+    <div class="kicker">THE HONEST COMPARISON</div>
+    <h2>Where $300 actually lands</h2>
+    <p class="sub">You have three real options. Here's the whole picture — decide for yourself.</p>
+    <div class="compare">
+      <div class="row head"><div></div><div>Agency</div><div class="hide-sm">DIY builder</div><div class="us">Blankd</div></div>
+      <div class="row"><div>Price</div><div class="no">$2,000–5,000</div><div class="meh hide-sm">$20+/mo forever</div><div class="us yes">$300 once</div></div>
+      <div class="row"><div>Time to launch</div><div class="no">4–8 weeks</div><div class="meh hide-sm">Your weekends</div><div class="us yes">48 hours</div></div>
+      <div class="row"><div>Custom design</div><div class="yes">Yes</div><div class="no hide-sm">Template</div><div class="us yes">Yes</div></div>
+      <div class="row"><div>You do the work</div><div class="yes">No</div><div class="no hide-sm">All of it</div><div class="us yes">None</div></div>
+      <div class="row"><div>Ongoing cost</div><div class="meh">$100+/mo retainer</div><div class="meh hide-sm">$240+/yr</div><div class="us yes">$0 (or $10/mo)</div></div>
+    </div>
+  </section>
+
+  <section id="pricing" class="reveal">
+    <div class="kicker" style="text-align:center">PRICING</div>
+    <h2 style="text-align:center">Simple, honest pricing</h2>
+    <p class="sub" style="text-align:center;margin-left:auto;margin-right:auto">The price on this page is the price you pay. That's the whole point.</p>
+    <div class="price-wrap">
+      <div class="price featured">
+        <div class="tag">MOST POPULAR</div>
+        <h3>THE WEBSITE</h3>
+        <div class="amount">$300</div>
+        <div class="per">one-time, flat</div>
+        <ul>
+          <li>Custom design, built for your business</li>
+          <li>Live in 48 hours from deposit</li>
+          <li>Mobile-first &amp; fast-loading</li>
+          <li>Google Maps + click-to-call ready</li>
+          <li>Two rounds of revisions included</li>
+        </ul>
+        <a class="btn primary" href="#contact">Claim a build slot</a>
+      </div>
+      <div class="price">
+        <h3>CARE PLAN</h3>
+        <div class="amount">$10<small>/mo</small></div>
+        <div class="per">optional, cancel anytime</div>
+        <ul>
+          <li>Hosting handled — site stays online</li>
+          <li>Text me an edit, done in 24h</li>
+          <li>Hours, menu &amp; price changes anytime</li>
+          <li>You never touch a control panel</li>
+        </ul>
+        <a class="btn ghost" href="#contact">Add at delivery</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq reveal">
+    <div class="kicker">FAIR QUESTIONS</div>
+    <h2>Things you're right to ask</h2>
+    <div class="card" style="margin-top:34px"><h3>Why so much cheaper than an agency?</h3><p>No office, no account managers, no six-week "discovery phase." Just the site, built well, built fast.</p></div>
+    <div class="card"><h3>What if I don't like it?</h3><p>Two revision rounds are included, and you only pay the second half when you're happy enough to go live.</p></div>
+    <div class="card"><h3>Do I own the site?</h3><p>Yes. It's yours. The care plan is convenience, not a hostage situation — cancel anytime and take the files with you.</p></div>
+    <div class="card"><h3>What do you need from me?</h3><p>About 30 minutes: your services, hours, photos, and phone number. I handle literally everything else.</p></div>
+  </section>
+
+  <section id="contact">
+    <div class="final reveal">
+      <div class="orb"></div>
+      <h2>Two build slots open this week.</h2>
+      <p>Text or email what your business does — I'll reply the same day with exactly what your site would look like.</p>
+      <a class="btn primary" href="mailto:wearblankd@gmail.com?subject=Website%20for%20my%20business">📧 wearblankd@gmail.com</a>
+    </div>
+  </section>
+
+</div>
+
+<footer><div class="wrap">© 2026 Blankd Web Studio — $300 flat. 48 hours. That's it.</div></footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
