@@ -56,11 +56,10 @@
   .svc .p{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;white-space:nowrap;margin-left:16px}
   .note{max-width:820px;margin:26px auto 0;text-align:center;color:var(--muted);font-size:.85rem}
 
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-  .g{position:relative;overflow:hidden;background:linear-gradient(160deg,#eae4d6,#ddd4c0);min-height:270px;border:1px solid var(--line)}
-  .g .img{position:absolute;inset:0;background-size:cover;background-position:center}
-  .g .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#a89a80;font-size:.8rem;text-align:center;padding:16px}
-  .g figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 12px;background:linear-gradient(transparent,rgba(24,21,18,.82));color:var(--cream);font-size:.85rem;z-index:2}
+  .feature{max-width:430px;margin:0 auto;background:var(--paper);border:1px solid var(--line);padding:14px}
+  .feature .fimg{aspect-ratio:3/4;background-size:cover;background-position:center;border:1px solid var(--line)}
+  .feature figcaption{text-align:center;font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--ink);padding:16px 8px 4px}
+  .feature .cap-sub{display:block;font-family:'Inter',sans-serif;font-size:.8rem;color:var(--muted);letter-spacing:.02em;margin-top:4px}
 
   .story{background:var(--ink);color:var(--cream)}
   .story .kicker{color:var(--tan)}
@@ -110,15 +109,12 @@
   <div class="wrap">
     <div class="kicker">THE WORK</div>
     <h2>From the studio's chairs</h2>
-    <p class="sub">Real clients, real results — color, dimension, texture and curl.</p>
-    <div class="gallery">
-      <figure class="g"><div class="ph">[ PHOTO: dimensional highlights ]</div><div class="img" style="background-image:url('images/work-1.jpg')"></div><figcaption>Dimensional highlights &amp; cut</figcaption></figure>
-      <figure class="g"><div class="ph">[ PHOTO: rose gold balayage ]</div><div class="img" style="background-image:url('images/work-2.jpg')"></div><figcaption>Rose gold balayage</figcaption></figure>
-      <figure class="g"><div class="ph">[ PHOTO: men's modern perm ]</div><div class="img" style="background-image:url('images/work-3.jpg')"></div><figcaption>Modern perm — yes, for guys too</figcaption></figure>
-      <figure class="g"><div class="ph">[ PHOTO: blonde textured cut ]</div><div class="img" style="background-image:url('images/work-4.jpg')"></div><figcaption>Blonde refresh &amp; textured style</figcaption></figure>
-      <figure class="g"><div class="ph">[ PHOTO: vivid orange fashion color ]</div><div class="img" style="background-image:url('images/work-5.jpg')"></div><figcaption>Vivid fashion color, roots to ends</figcaption></figure>
-      <figure class="g"><div class="ph">[ PHOTO: men's cut ]</div><div class="img" style="background-image:url('images/work-6.jpg')"></div><figcaption>Men's cut &amp; taper</figcaption></figure>
-    </div>
+    <p class="sub">Real clients, real color — straight from the 512 Studio chair.</p>
+    <figure class="feature">
+      <div class="fimg" style="background-image:url('images/balayage.jpg')"></div>
+      <figcaption>Rose gold balayage<span class="cap-sub">soft, dimensional, lived-in color</span></figcaption>
+    </figure>
+    <p class="note">More cuts, color and perms from the studio drop in here — send your favorite photos and they're on the site the same day.</p>
   </div>
 </section>
 
@@ -145,10 +141,9 @@
 
 <section class="story">
   <div class="wrap">
-    <div style="max-width:380px;margin:0 auto 34px;position:relative;min-height:0">
-      <div style="position:relative;overflow:hidden;border:1px solid #3a352c;min-height:260px;background:linear-gradient(160deg,#26221c,#332e26)">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#6f675a;font-size:.8rem;text-align:center;padding:16px">[ PHOTO: stylist with the 512 Studio sign ]</div>
-        <div style="position:absolute;inset:0;background:url('images/team.jpg') center/cover"></div>
+    <div style="max-width:360px;margin:0 auto 34px">
+      <div style="overflow:hidden;border:1px solid #3a352c;padding:12px;background:#201c16">
+        <div style="aspect-ratio:4/5;background:url('images/team.jpg') center 30%/cover;border:1px solid #3a352c"></div>
       </div>
     </div>
     <div class="kicker">EST. 2022</div>
