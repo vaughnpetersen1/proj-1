@@ -9,7 +9,7 @@ down next to the excuses, and both get read at month-end.
 | # | Target | Status |
 |---|--------|--------|
 | 1 | All 13 DMs sent (batch 1 + batch 2) | 5/13 |
-| 2 | blankd.online connected + demos live | pending |
+| 2 | Site LIVE on GitHub Pages (blankd-v2) + demos live | DONE 2026-07-21 |
 | 3 | Business posted on personal socials with "tag a business owner" ask | pending |
 | 4 | Saturday follow-ups sent w/ screenshots (Skylar, Lane, 512, Shine Time) | pending |
 | 5 | eBay live + first real `--watchlist` scan run | eBay LIVE - scan pending |
