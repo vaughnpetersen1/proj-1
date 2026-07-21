@@ -45,12 +45,12 @@ Happy to mock up a One 21 version free so you can see what 15 years of reputatio
 
 ════════════════════════════════════════
 5) THE 512 STUDIO — FB DM or email Studiollc2022@gmail.com
-   THEY REPLIED — send this WITH their finished preview once photos are in:
+   THEY REPLIED + real photos are now ON the preview. READY TO SEND.
    https://vaughnpetersen1.github.io/blankd-v2/clients/512.html
 ════════════════════════════════════════
-Hey! Put together a preview of what a 512 Studio site could look like — your logo, your services, your work: https://vaughnpetersen1.github.io/blankd-v2/clients/512.html
+Hey! Finished the 512 Studio preview — and I put your actual work on it: the rose gold balayage, the highlights, the vivid orange, the guys' cuts, plus the shot of you by the sign. Here it is: https://vaughnpetersen1.github.io/blankd-v2/clients/512.html
 
-Show your partners. If you want it, it's $300 flat, live this week. No commitment either way — the design's yours to keep.
+Basically your site, just not live yet. Show your partners — if you want it it's $300 flat and I can have it on your own domain this week. Either way the design's yours, no pressure.
 
 ════════════════════════════════════════
 6) EL PAISA TAQUERIA — FB DM or text (507) 301-9949
