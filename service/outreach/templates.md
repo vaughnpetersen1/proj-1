@@ -8,12 +8,20 @@ something specific about *their* business — that one detail doubles reply rate
 Google Maps → "[niche] near me". Good niches: barbers, detailers, landscapers,
 cleaners, taco/food spots, nail salons, tattoo artists, handymen, mobile mechanics.
 
-A business is a **lead** if any of these are true:
+A business is a **lead** only if it's ACTIVE **and** one of these web-presence
+problems is true:
+
+**Activity gate (check FIRST — boss rule, 2026-07-21):** they must have posted
+online (FB / IG / Google) within the past 12 months. Last post older than a
+year = dead business, skip it. No exceptions — a dead shop can't buy a site.
+
+Then, if active, it's a lead when any of these are true:
 - No website link at all on their Google listing
 - Their "website" is a Facebook page or a linktree
 - Their site is broken on mobile, has no prices/hours, or says © 2017
 
-Log each lead: name, niche, phone/IG/email, what's wrong with their web presence.
+Log each lead: name, niche, phone/IG/email, what's wrong with their web presence,
+and the date of their most recent post (proof they're alive).
 
 ## Message 1 — Instagram/Facebook DM (best reply rates for local)
 

@@ -20,6 +20,9 @@ Two revenue engines targeting $200+/month net. Start at README.md and PLAN.md.
 6. Verify a lead has no website before sending a "you have no website" pitch
 7. Never commit secrets. eBay/Google keys via env vars only.
 8. Flip discipline: $120 max/item month 1 · $25 min projected profit · test before paying
+9. Leads must be ACTIVE online — last social post within the past 12 months.
+   No post in a year = dead business, skip it. Verify activity + no-website
+   (rule 6) before a lead ever makes the list. (boss-set 2026-07-21)
 
 ## Platform constraints (learned the hard way — don't re-derive)
 - GitHub access is scoped per-session; proj-1 only unless add_repo succeeds.
