@@ -17,14 +17,19 @@ where noted — it renders without them tapping anything.
 sent you a couple messages on FB about the Eden Landscape website I built —
 figured they got buried. Here it is if you want a look: [link]. — [name]")*
 
-### Lane / MN Detail CO — same FB thread, ATTACH screenshot of detailing demo
+### Lane / MN Detail CO — same FB thread, ATTACH screenshot of HIS real mockup
+### Live page now built: https://vaughnpetersen1.github.io/blankd-v2/clients/mndetail.html
 
-> One more thing and then I'll leave you alone — this is the style I'd do
-> for MN Detail Co. [screenshot attached]
+> One more and then I'll leave you alone — I actually went ahead and built
+> it. This is MN Detail Co: your System X ceramic work, paint correction,
+> your booking. [screenshot attached]
 >
-> Your ceramic work deserves better than a booking link, and mndetailco.com
-> is just sitting there waiting to be a real site. $300 flat if you ever
-> want it. Either way, keep killing it down there.
+> Live here if you want to poke around on your phone:
+> https://vaughnpetersen1.github.io/blankd-v2/clients/mndetail.html
+>
+> The book buttons feed your Urable page so nothing about your scheduling
+> changes. mndetailco.com is just sitting there waiting for it. $300 flat,
+> live this week if you want it. Either way, keep killing it down there.
 
 ### The 512 Studio — same FB thread
 
