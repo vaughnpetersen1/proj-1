@@ -27,3 +27,10 @@ DROPPED after verification (do NOT send — they have real websites / bad fit):
 - Showroom Ready MN (Mankato) — has showroomreadymn.com
 - JIVE hair (Alexandria) — has jivehair.com
 - J & CO Haus of Hair (Alexandria) — closing location Aug 29, has glossgenius site
+
+════════════════════════════════════════
+3) KZ'S FADES AND CUTS, LLC — call/text (920) 988-5442 · kzsfnc@hotmail.com · fb:KZs.Fades.N.Cuts
+   810 E Maple St, Horicon, WI. Home barbershop/salon, open 1 yr. NO website (FB+IG only).
+   ACTIVE: her own posts dated May 17 & Jun 1 2026. (Out of our MN area but remote-ok.)
+════════════════════════════════════════
+Hey! Found Kz's Fades and Cuts — congrats on the first year, that's huge. Saw you're all Facebook and Instagram right now with no website, which means people googling "barber near me in Horicon" aren't finding you yet. I build simple sites for barbers, $300 flat, live in 48 hours, with your hours, your photos and a tap-to-call. Here's my work: https://vaughnpetersen1.github.io/blankd-v2/demos/barber.html — want me to mock up a Kz's version free so you can see it first?

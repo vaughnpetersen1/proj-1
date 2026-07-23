@@ -1,5 +1,11 @@
 # Batch 3 — ready-to-send DMs (written 2026-07-21)
 
+## RE-AUDITED 2026-07-23 (strict activity check):
+## SEND: Lakeside Barber (Yelp Jul 2026), Dan's Skyline (live Fresha + Jun 2026),
+##       Deep Cuts (recent 2026 reviews) — all no real site + proven active.
+## BENCH (verify FB feed yourself first — no dated activity signal found):
+##       Center Barber Shop, Golden Detailing.
+
 Voice rule: reads like a text from a real person. No emojis, no "I hope this
 finds you well." Name one specific real thing about THEIR shop.
 
