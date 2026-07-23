@@ -11,17 +11,25 @@ cleaners, taco/food spots, nail salons, tattoo artists, handymen, mobile mechani
 A business is a **lead** only if it's ACTIVE **and** one of these web-presence
 problems is true:
 
-**Activity gate (check FIRST — boss rule, 2026-07-21):** they must have posted
-online (FB / IG / Google) within the past 12 months. Last post older than a
-year = dead business, skip it. No exceptions — a dead shop can't buy a site.
+**Activity gate (check FIRST — boss rule, tightened 2026-07-23):** the business
+must be PROVABLY active within the last 12 months. Claude cannot see FB/IG feeds
+(proxy blocks them), so "has a Facebook page" is NOT proof. Proof = a dated
+signal Claude can actually find: a Google/Yelp review dated within ~12 months, a
+dated recent post in search, or a listing "updated [month] 2026" with a real
+date. No dated proof found → it goes on the BENCH ("verify feed yourself"), NOT
+the send list. Better to hand over 2 proven-active leads than 6 guesses.
 
-Then, if active, it's a lead when any of these are true:
-- No website link at all on their Google listing
-- Their "website" is a Facebook page or a linktree
-- Their site is broken on mobile, has no prices/hours, or says © 2017
+Then, if proven active, it's a lead when EITHER is true (boss, 2026-07-23 — we
+stay small-business for now, but both no-site and bad-site count):
+- NO website: nothing but a Facebook page, a Linktree, or no link at all
+- SHITTY site: broken on mobile, no prices/hours, © 2017 or older, ugly/dated
+  → this is a REDESIGN pitch ("modernize your site"), not "you have none"
 
-Log each lead: name, niche, phone/IG/email, what's wrong with their web presence,
-and the date of their most recent post (proof they're alive).
+Skip the big established industries (roofing, HVAC, dentists, med spas) — they
+almost all have real sites and gatekeepers; wrong fit for cold DMs right now.
+
+Log each lead: name, niche, phone/IG/email, no-site vs bad-site, AND the dated
+activity signal that proves they're alive (e.g., "Yelp review 03/2026").
 
 ## Message 1 — Instagram/Facebook DM (best reply rates for local)
 
