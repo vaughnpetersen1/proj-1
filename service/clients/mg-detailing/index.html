@@ -3,198 +3,376 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MG Detailing — Mobile Auto, Marine & Aviation Detailing | Twin Cities, MN</title>
-<meta name="description" content="MG Detailing — mobile auto, marine and aviation detailing across the Twin Cities. We come to you: home, office, marina or hangar. Call (612) 823-8584.">
+<title>MG Detailing — Mobile Auto, Marine &amp; Aviation Detailing | Twin Cities, MN</title>
+<meta name="description" content="MG Detailing brings showroom-grade auto, marine and aviation detailing to your driveway, office, marina or hangar across the Twin Cities. Book your detail today.">
+<meta property="og:title" content="MG Detailing — Mobile Detailing, Twin Cities">
+<meta property="og:description" content="Showroom-grade auto, marine and aviation detailing, wherever it's parked, docked or hangared.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <style>
-  :root{--bg:#ffffff;--ink:#14171c;--muted:#6b7280;--line:#e6e8ec;--panel:#f6f7f9;--ink2:#000}
+  :root{
+    --bg:#fbfaf8; --ink:#121316; --soft:#5e626a; --faint:#8a8e96;
+    --line:#e9e7e2; --panel:#f4f2ee; --accent:#9a6b3d; --accent-soft:#f0e7db;
+    --shadow:0 22px 60px -28px rgba(20,18,14,.35);
+    --r:16px;
+  }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-  .wrap{max-width:1020px;margin:0 auto;padding:0 22px}
-  .ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
-  header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
-  nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.02em;font-size:1.1rem}
-  .brand img{height:38px;width:38px;object-fit:contain;border-radius:6px}
-  nav a.cta{background:var(--ink2);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:800;font-size:.9rem}
-  .hero{padding:88px 0 64px;text-align:center;border-bottom:1px solid var(--line)}
-  .hero .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:99px;padding:6px 16px;font-size:.83rem;font-weight:700;margin-bottom:22px}
-  .hero h1{font-size:clamp(2.2rem,5.5vw,3.5rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
-  .hero p{color:var(--muted);max-width:560px;margin:20px auto 0;font-size:1.1rem}
-  .hero .btn{display:inline-block;margin-top:30px;background:var(--ink2);color:#fff;font-weight:800;padding:15px 34px;border-radius:10px;text-decoration:none;font-size:1rem}
-  .herologo{margin:38px auto 0;width:230px;height:230px;object-fit:contain;display:block;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
-  .trust{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;padding:22px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:.92rem}
-  .trust div{display:inline-flex;align-items:center;gap:9px}
-  .trust b{color:var(--ink)}
-  section{padding:74px 0}
-  h2{font-size:clamp(1.6rem,3.4vw,2.1rem);font-weight:800;text-align:center}
-  .sub{text-align:center;color:var(--muted);max-width:560px;margin:10px auto 44px}
-  .lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-  .lane{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 24px;text-align:center}
-  .lane .ic{width:34px;height:34px;color:var(--ink2);margin-bottom:12px}
-  .lane h3{font-size:1.12rem;font-weight:800;margin-bottom:8px}
-  .lane p{color:var(--muted);font-size:.92rem}
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-  .g{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:12px}
-  .g .img{aspect-ratio:1/1;background-size:cover;background-position:center;display:block}
-  .g figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font-size:.82rem;font-weight:600}
-  .pkgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-  .pkg{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:30px 26px;display:flex;flex-direction:column}
-  .pkg.hot{border-color:var(--ink2);box-shadow:0 0 0 1px var(--ink2)}
-  .pkg .tier{font-size:.78rem;font-weight:800;letter-spacing:.12em;color:var(--muted)}
-  .pkg .price{font-size:2.3rem;font-weight:800;margin:8px 0 2px}
-  .pkg .time{color:var(--muted);font-size:.85rem;margin-bottom:16px}
-  .pkg ul{list-style:none;flex:1}
-  .pkg li{padding:8px 0 8px 26px;position:relative;color:var(--ink);font-size:.93rem;border-bottom:1px solid var(--line)}
-  .pkg li svg{position:absolute;left:0;top:10px;color:var(--ink2)}
-  .pkg li:last-child{border:none}
-  .pkg a{margin-top:18px;text-align:center;border:1.5px solid var(--ink2);color:var(--ink2);border-radius:9px;padding:12px;text-decoration:none;font-weight:800;font-size:.93rem}
-  .pkg.hot a{background:var(--ink2);color:#fff}
-  .band{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .band .wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;padding-top:32px;padding-bottom:32px}
-  .band .ic{color:var(--ink2);width:32px;height:32px}
-  .band b{color:var(--ink)}
-  .band p{color:var(--muted);font-size:.95rem;max-width:640px}
-  .quote{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:54px 30px;text-align:center}
-  .quote h2{margin-bottom:6px}
-  .quote p{color:var(--muted);margin-bottom:26px}
-  .quote .btn{display:inline-flex;align-items:center;gap:9px;background:var(--ink2);color:#fff;font-weight:800;padding:15px 30px;border-radius:10px;text-decoration:none;margin:0 8px 10px}
-  .quote .alt{background:#fff;border:1.5px solid var(--ink2);color:var(--ink2)}
-  .note{text-align:center;color:var(--muted);font-size:.82rem;max-width:640px;margin:22px auto 0}
-  footer{border-top:1px solid var(--line);text-align:center;padding:38px 22px;color:var(--muted);font-size:.85rem}
-  footer b{color:var(--ink)}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  a{color:inherit}
+  .ic{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .eyebrow{font-size:.74rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+
+  /* reveal animation */
+  .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(251,250,248,.72);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+  header.scrolled{border-bottom-color:var(--line);background:rgba(251,250,248,.9)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.02em;font-size:1.05rem}
+  .brand img{height:34px;width:34px;object-fit:contain;border-radius:7px;background:#fff;border:1px solid var(--line)}
+  .navlinks{display:flex;gap:34px;list-style:none}
+  .navlinks a{text-decoration:none;font-size:.92rem;font-weight:500;color:var(--soft);transition:color .2s}
+  .navlinks a:hover{color:var(--ink)}
+  .nav-cta{text-decoration:none;background:var(--ink);color:#fff;padding:11px 22px;border-radius:100px;font-size:.88rem;font-weight:600;transition:transform .2s,background .2s}
+  .nav-cta:hover{transform:translateY(-1px);background:#000}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;color:var(--ink)}
+  @media(max-width:860px){.navlinks,.nav-cta{display:none}.menu-btn{display:block}}
+
+  /* hero */
+  .hero{padding:76px 0 40px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(2.7rem,5.6vw,4.5rem);line-height:1.02;font-weight:600;letter-spacing:-.02em;margin:20px 0 0}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero p.lede{font-size:1.16rem;color:var(--soft);max-width:460px;margin:22px 0 0}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;font-size:.96rem;padding:15px 30px;border-radius:100px;transition:transform .2s,background .2s,box-shadow .2s}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .hero-note{margin-top:20px;font-size:.86rem;color:var(--faint);display:flex;align-items:center;gap:8px}
+  .hero-art{position:relative}
+  .hero-art .frame{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);aspect-ratio:4/5;background:#eee}
+  .hero-art .frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero-badge{position:absolute;left:-22px;bottom:-22px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:13px}
+  .hero-badge .num{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;line-height:1}
+  .hero-badge .lbl{font-size:.76rem;color:var(--soft);line-height:1.3}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:44px}.hero-art{max-width:420px;margin:0 auto}.hero-badge{left:0}}
+
+  /* marquee trust */
+  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:56px}
+  .trust .wrap{display:flex;flex-wrap:wrap;gap:14px 48px;justify-content:center;padding:26px 28px}
+  .trust .item{display:flex;align-items:center;gap:10px;font-size:.94rem;color:var(--soft)}
+  .trust .item svg{color:var(--accent)}
+  .trust .item b{color:var(--ink);font-weight:600}
+
+  /* section shell */
+  section{padding:96px 0}
+  .sec-head{max-width:640px;margin:0 auto 56px;text-align:center}
+  .sec-head h2{font-size:clamp(2rem,4vw,2.9rem);font-weight:600;letter-spacing:-.02em;line-height:1.08;margin-top:12px}
+  .sec-head p{color:var(--soft);margin-top:14px;font-size:1.06rem}
+
+  /* services lanes */
+  .lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .lane{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:34px 30px;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .lane:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#ddd8ce}
+  .lane .badge{width:48px;height:48px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .lane .badge svg{width:24px;height:24px}
+  .lane h3{font-size:1.4rem;font-weight:600;margin-bottom:8px}
+  .lane p{color:var(--soft);font-size:.96rem}
+  @media(max-width:860px){.lanes{grid-template-columns:1fr}}
+
+  /* packages */
+  .pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+  .pkg{border:1px solid var(--line);border-radius:var(--r);padding:32px 28px;background:#fff;display:flex;flex-direction:column}
+  .pkg.feat{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .pkg .tier{font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+  .pkg.feat .tier{color:#d8b487}
+  .pkg .price{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:600;margin:10px 0 2px;line-height:1}
+  .pkg .per{font-size:.85rem;color:var(--faint);margin-bottom:20px}
+  .pkg.feat .per{color:#a9adb4}
+  .pkg ul{list-style:none;flex:1;display:flex;flex-direction:column;gap:11px}
+  .pkg li{display:flex;gap:11px;align-items:flex-start;font-size:.94rem;color:var(--soft)}
+  .pkg.feat li{color:#cfd2d7}
+  .pkg li svg{flex:none;width:19px;height:19px;color:var(--accent);margin-top:1px}
+  .pkg .go{margin-top:26px;text-align:center;text-decoration:none;font-weight:600;font-size:.92rem;padding:13px;border-radius:100px;border:1.5px solid var(--line);color:var(--ink);transition:all .2s}
+  .pkg .go:hover{border-color:var(--ink)}
+  .pkg.feat .go{background:#fff;color:var(--ink);border-color:#fff}
+  @media(max-width:860px){.pkgs{grid-template-columns:1fr}}
+
+  /* work gallery */
+  .gallery{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:190px;gap:16px}
+  .tile{position:relative;overflow:hidden;border-radius:var(--r);border:1px solid var(--line);background:#eee}
+  .tile img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1);display:block}
+  .tile:hover img{transform:scale(1.06)}
+  .tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 16px 13px;background:linear-gradient(transparent,rgba(10,10,12,.72));color:#fff;font-size:.85rem;font-weight:500}
+  .tile.big{grid-column:span 3;grid-row:span 2}
+  .tile.wide{grid-column:span 3}
+  .tile.sq{grid-column:span 2}
+  @media(max-width:860px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}.tile.big{grid-column:span 2;grid-row:span 2}.tile.wide,.tile.sq{grid-column:span 1}}
+
+  /* about split */
+  .about{background:var(--panel)}
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .about-art{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);aspect-ratio:1/1}
+  .about-art img{width:100%;height:100%;object-fit:cover}
+  .about h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:600;letter-spacing:-.02em;line-height:1.1;margin:12px 0 0}
+  .about p{color:var(--soft);margin-top:18px;font-size:1.04rem}
+  .about .stats{display:flex;gap:40px;margin-top:30px}
+  .about .stat .n{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;line-height:1}
+  .about .stat .l{font-size:.84rem;color:var(--faint);margin-top:4px}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px}}
+
+  /* testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .quote{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px}
+  .quote .stars{color:var(--accent);letter-spacing:3px;font-size:.9rem}
+  .quote p{margin:16px 0 20px;font-size:1.02rem;color:var(--ink);font-family:'Fraunces',serif;line-height:1.5}
+  .quote .who{font-size:.86rem;color:var(--faint)}
+  @media(max-width:860px){.quotes{grid-template-columns:1fr}}
+
+  /* contact */
+  .contact{background:var(--ink);color:#fff}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .contact h2{font-size:clamp(2rem,4vw,2.9rem);font-weight:600;letter-spacing:-.02em;color:#fff;line-height:1.06}
+  .contact .eyebrow{color:#d8b487}
+  .contact p.sub{color:#a9adb4;margin-top:14px;font-size:1.05rem;max-width:420px}
+  .contact .lines{margin-top:34px;display:flex;flex-direction:column;gap:18px}
+  .contact .line{display:flex;align-items:center;gap:14px;color:#e7e8ea;text-decoration:none;font-size:1rem}
+  .contact .line svg{color:#d8b487}
+  form{background:#fff;border-radius:var(--r);padding:32px;color:var(--ink)}
+  form .row{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+  form label{font-size:.82rem;font-weight:600;color:var(--soft)}
+  form input,form textarea{border:1px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;font-size:.95rem;background:var(--bg);transition:border-color .2s}
+  form input:focus,form textarea:focus{outline:none;border-color:var(--accent)}
+  form button{width:100%;background:var(--ink);color:#fff;border:0;border-radius:100px;padding:15px;font:inherit;font-weight:600;font-size:1rem;cursor:pointer;transition:background .2s}
+  form button:hover{background:#000}
+  form .fine{font-size:.78rem;color:var(--faint);text-align:center;margin-top:12px}
+  @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:36px}}
+
+  .placeholder-note{text-align:center;color:var(--faint);font-size:.82rem;margin-top:26px}
+
+  footer{background:var(--ink);color:#8a8e96;padding:40px 0;border-top:1px solid rgba(255,255,255,.08);text-align:center;font-size:.86rem}
+  footer .fbrand{font-family:'Fraunces',serif;color:#fff;font-size:1.2rem;letter-spacing:.02em;margin-bottom:6px}
+  footer a{color:#d8b487;text-decoration:none}
 </style>
 </head>
 <body>
 
-<header><div class="wrap"><nav>
-  <div class="brand"><img src="images/mg-logo.jpg" alt="MG Detailing logo">MG DETAILING</div>
-  <a class="cta" href="#quote">Get a quote</a>
+<header id="hdr"><div class="wrap"><nav>
+  <a class="brand" href="#top"><img src="images/mg-logo.jpg" alt="MG Detailing logo">MG Detailing</a>
+  <ul class="navlinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Get a quote</a>
+  <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('services').scrollIntoView()"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
 </nav></div></header>
 
-<div class="hero">
-  <div class="wrap">
-    <div class="pill"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h13l3-4h2v6H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>Fully mobile — we come to you</div>
-    <h1>Showroom-clean. Wherever it's parked, docked, or hangared.</h1>
-    <p>Mobile auto, marine and aviation detailing across the Twin Cities — done right in your driveway, at the office, at the marina, or on the tarmac.</p>
-    <a class="btn" href="#quote">Get my free quote →</a>
-    <img class="herologo" src="images/mg-logo.jpg" alt="MG Detailing logo">
-  </div>
-</div>
+<main id="top">
 
-<div class="trust wrap">
-  <div><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h13l3-4h2v6H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><b>We come to you</b></div>
-  <div><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6z"/></svg><b>Fully insured</b></div>
-  <div><svg class="ic" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg><b>Pro-grade</b> products</div>
-  <div><svg class="ic" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Twin Cities metro</div>
-</div>
-
-<section id="work">
-  <div class="wrap">
-    <h2>The work speaks</h2>
-    <p class="sub">Real details from MG — cars, trucks and boats, all cleaned on-site.</p>
-    <div class="gallery">
-      <figure class="g"><div class="img" style="background-image:url('images/mg-porsche.jpg')"></div><figcaption>Exotic &amp; sports car detail</figcaption></figure>
-      <figure class="g"><div class="img" style="background-image:url('images/mg-interior.jpg')"></div><figcaption>Full interior restoration</figcaption></figure>
-      <figure class="g"><div class="img" style="background-image:url('images/mg-boat1.jpg')"></div><figcaption>Marine detail &amp; wash</figcaption></figure>
-      <figure class="g"><div class="img" style="background-image:url('images/mg-suv.jpg')"></div><figcaption>SUV exterior &amp; paint</figcaption></figure>
-      <figure class="g"><div class="img" style="background-image:url('images/mg-boat2.jpg')"></div><figcaption>Dockside &amp; stored boats</figcaption></figure>
-      <figure class="g"><div class="img" style="background-image:url('images/mg-rover.jpg')"></div><figcaption>Exterior wash &amp; protection</figcaption></figure>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">Mobile · Auto · Marine · Aviation</span>
+      <h1>Showroom clean,<br><em>wherever it lives.</em></h1>
+      <p class="lede">MG Detailing brings meticulous, showroom-grade detailing to your driveway, office, marina or hangar — across the Twin Cities.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#contact">Book your detail <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#work">See the work</a>
+      </div>
+      <div class="hero-note"><svg class="ic" viewBox="0 0 24 24" style="width:17px;height:17px;color:var(--accent)"><path d="M20 6 9 17l-5-5"/></svg>Fully insured · we come to you · pay after you inspect</div>
+    </div>
+    <div class="hero-art reveal">
+      <div class="frame"><img src="images/mg-porsche.jpg" alt="A freshly detailed sports car by MG Detailing"></div>
+      <div class="hero-badge">
+        <div class="num">100%</div>
+        <div class="lbl">Would recommend<br>MG Detailing</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="what" style="padding-top:0">
+<div class="trust">
   <div class="wrap">
-    <h2>Not just cars</h2>
-    <p class="sub">Most detailers stop at the driveway. We show up for whatever you own that deserves to shine.</p>
+    <div class="item"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h13l3-4h2v6H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><b>We come to you</b></div>
+    <div class="item"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6z"/></svg><b>Fully insured</b></div>
+    <div class="item"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg><b>Pro-grade</b> products</div>
+    <div class="item"><svg class="ic" viewBox="0 0 24 24"><path d="M3 15h18l-2 5H5z"/><path d="M6 15V6l9 3-9 6"/></svg>Cars, boats &amp; aircraft</div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What we do</span>
+      <h2>Not just cars.</h2>
+      <p>Most detailers stop at the driveway. We show up for anything with a finish worth protecting.</p>
+    </div>
     <div class="lanes">
-      <div class="lane">
-        <svg class="ic" viewBox="0 0 24 24"><path d="M3 12h13l3-4h2v6H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+      <div class="lane reveal">
+        <div class="badge"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h13l3-4h2v6H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
         <h3>Auto</h3>
-        <p>Cars, trucks, SUVs and fleets — interior deep cleans, paint work and protection at your home or office.</p>
+        <p>Cars, trucks, SUVs and fleets — interior deep cleans, paint correction and protection, done at your home or office.</p>
       </div>
-      <div class="lane">
-        <svg class="ic" viewBox="0 0 24 24"><path d="M3 15h18l-2 5H5z"/><path d="M6 15V6l9 3-9 6M12 3v4"/></svg>
+      <div class="lane reveal">
+        <div class="badge"><svg class="ic" viewBox="0 0 24 24"><path d="M3 15h18l-2 5H5z"/><path d="M6 15V6l9 3-9 6M12 3v4"/></svg></div>
         <h3>Marine</h3>
-        <p>Boats and watercraft cleaned, oxidation removed and sealed — dockside at your marina or on the trailer.</p>
+        <p>Boats and watercraft cleaned, oxidation removed and sealed for the season — dockside at your marina or on the trailer.</p>
       </div>
-      <div class="lane">
-        <svg class="ic" viewBox="0 0 24 24"><path d="M2 12h20M12 2l4 8M12 2 8 10M6 22l2-4M18 22l-2-4"/></svg>
+      <div class="lane reveal">
+        <div class="badge"><svg class="ic" viewBox="0 0 24 24"><path d="M2 12h20M12 2l4 8M12 2 8 10M6 22l2-4M18 22l-2-4"/></svg></div>
         <h3>Aviation</h3>
         <p>Aircraft exterior and cabin detailing to the standard the hangar expects — brightwork, belly and interior.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="packages" style="padding-top:0">
-  <div class="wrap">
-    <h2>Auto packages</h2>
-    <p class="sub">Flat pricing so there are no surprises when we pull up. Trucks &amp; SUVs priced on size.</p>
     <div class="pkgs">
-      <div class="pkg">
-        <div class="tier">THE REFRESH</div>
-        <div class="price">$99</div>
-        <div class="time">~1.5 hours</div>
+      <div class="pkg reveal">
+        <span class="tier">The Refresh</span>
+        <div class="price">$99</div><div class="per">interior + wash · ~1.5 hrs</div>
         <ul>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full interior vacuum</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>All surfaces wiped &amp; dressed</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Surfaces wiped &amp; dressed</li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Streak-free glass</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Hand wash &amp; dry exterior</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Hand wash &amp; dry</li>
         </ul>
-        <a href="#quote">Book The Refresh</a>
+        <a class="go" href="#contact">Choose Refresh</a>
       </div>
-      <div class="pkg hot">
-        <div class="tier">THE FULL DETAIL</div>
-        <div class="price">$199</div>
-        <div class="time">~3 hours</div>
+      <div class="pkg feat reveal">
+        <span class="tier">The Full Detail</span>
+        <div class="price">$199</div><div class="per">inside &amp; out · ~3 hrs</div>
         <ul>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Everything in The Refresh</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Shampoo carpets, mats &amp; seats</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Shampoo carpets &amp; seats</li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Leather cleaned &amp; conditioned</li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Clay bar + machine wax</li>
         </ul>
-        <a href="#quote">Book The Full Detail</a>
+        <a class="go" href="#contact">Choose Full Detail</a>
       </div>
-      <div class="pkg">
-        <div class="tier">THE SHOWROOM</div>
-        <div class="price">$329</div>
-        <div class="time">~5 hours</div>
+      <div class="pkg reveal">
+        <span class="tier">The Showroom</span>
+        <div class="price">$329</div><div class="per">correction + protect · ~5 hrs</div>
         <ul>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Everything in The Full Detail</li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>One-step paint correction</li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Sealant / ceramic protection</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Engine bay &amp; headlight restore</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Engine bay &amp; headlights</li>
         </ul>
-        <a href="#quote">Book The Showroom</a>
+        <a class="go" href="#contact">Choose Showroom</a>
       </div>
     </div>
-    <p class="note">[ Preview note: package names &amp; prices are placeholders — you set the real menu (auto, marine &amp; aviation) and I update it before launch. ]</p>
+    <p class="placeholder-note">Package names &amp; prices are placeholders for this preview — MG sets the real menu (auto, marine &amp; aviation) before launch.</p>
   </div>
 </section>
 
-<div class="band"><div class="wrap">
-  <svg class="ic" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3"/><path d="M9 9v.01M9 12v.01M9 15v.01"/></svg>
-  <p><b>Fleets, dealerships &amp; marinas.</b> MG keeps business vehicles, showroom inventory and docked boats camera-ready on a schedule that works for you. Ask about recurring accounts.</p>
-</div></div>
-
-<section id="quote">
+<section id="work" style="padding-top:0">
   <div class="wrap">
-    <div class="quote">
-      <h2>Free quote in under an hour</h2>
-      <p>Text a photo of your vehicle, boat or aircraft plus your zip — we'll send back your exact price and next open slot.</p>
-      <a class="btn" href="sms:6128238584"><svg class="ic" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Text (612) 823-8584</a>
-      <a class="btn alt" href="tel:6128238584"><svg class="ic" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3A19.5 19.5 0 0 1 5.1 13 19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .4 2 .6 3 .7a2 2 0 0 1 1.6 2z"/></svg>Or just call</a>
+    <div class="sec-head reveal">
+      <span class="eyebrow">The work</span>
+      <h2>Details that speak.</h2>
+      <p>Real vehicles, real finishes — every one detailed on-site by MG.</p>
+    </div>
+    <div class="gallery reveal">
+      <figure class="tile big"><img src="images/mg-porsche.jpg" alt="Sports car detail"><figcaption>Exotic &amp; sports car detail</figcaption></figure>
+      <figure class="tile sq"><img src="images/mg-interior.jpg" alt="Interior restoration"><figcaption>Interior restoration</figcaption></figure>
+      <figure class="tile sq"><img src="images/mg-boat1.jpg" alt="Marine detail"><figcaption>Marine detail</figcaption></figure>
+      <figure class="tile sq"><img src="images/mg-suv.jpg" alt="SUV exterior"><figcaption>SUV exterior &amp; paint</figcaption></figure>
+      <figure class="tile sq"><img src="images/mg-boat2.jpg" alt="Boat detail"><figcaption>Dockside &amp; stored boats</figcaption></figure>
+      <figure class="tile sq"><img src="images/mg-rover.jpg" alt="Exterior wash"><figcaption>Exterior wash &amp; protection</figcaption></figure>
     </div>
   </div>
 </section>
 
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-art reveal"><img src="images/mg-boat2.jpg" alt="MG Detailing at work"></div>
+    <div class="reveal">
+      <span class="eyebrow">About MG</span>
+      <h2>Detailing that comes to you.</h2>
+      <p>MG Detailing was built on a simple idea: the people who care most about their vehicles have the least time to sit at a shop. So we bring the shop to them — the same pro-grade products, the same obsessive finish, in your own driveway, at the office, or down at the marina.</p>
+      <p>From daily drivers to weekend boats to aircraft on the tarmac, every job gets the same standard: leave it looking better than the day it rolled off the lot.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">100%</div><div class="l">Would recommend</div></div>
+        <div class="stat"><div class="n">3-in-1</div><div class="l">Auto · Marine · Aviation</div></div>
+        <div class="stat"><div class="n">Mobile</div><div class="l">We come to you</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Reviews</span>
+      <h2>What clients say.</h2>
+      <p>Your real Google &amp; Facebook reviews drop in here — these are placeholders showing the layout.</p>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>“Showed up on time, and my truck honestly looked better than when I bought it. Didn't have to leave my driveway.”</p><div class="who">— [ your real review here ]</div></div>
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>“Had them do the boat before the lake season. The oxidation was gone and the finish was unreal. Booking again.”</p><div class="who">— [ your real review here ]</div></div>
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>“Professional, thorough, and came right to the office. The interior looks and smells brand new.”</p><div class="who">— [ your real review here ]</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Get a quote</span>
+      <h2>Ready when you are.</h2>
+      <p class="sub">Send a photo of your vehicle, boat or aircraft plus your zip — you'll get an exact price and the next open slot, usually within the hour.</p>
+      <div class="lines">
+        <a class="line" href="tel:6128238584"><svg class="ic" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3A19.5 19.5 0 0 1 5.1 13 19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .4 2 .6 3 .7a2 2 0 0 1 1.6 2z"/></svg>(612) 823-8584</a>
+        <a class="line" href="https://instagram.com/mgdetailingmn"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>@mgdetailingmn</a>
+        <div class="line"><svg class="ic" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Serving the Twin Cities metro</div>
+      </div>
+    </div>
+    <form onsubmit="return false">
+      <div class="row"><label for="n">Name</label><input id="n" type="text" placeholder="Your name"></div>
+      <div class="row"><label for="v">Vehicle / boat / aircraft</label><input id="v" type="text" placeholder="e.g. 2021 F-150, 22ft pontoon"></div>
+      <div class="row"><label for="m">What do you need?</label><textarea id="m" rows="3" placeholder="Interior, exterior, ceramic… and your zip code"></textarea></div>
+      <button type="submit">Request my quote</button>
+      <p class="fine">Preview form — wires to MG's phone/email at launch.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
 <footer>
-  <b>MG Detailing</b> — Mobile Auto · Marine · Aviation · Twin Cities, MN<br>
-  (612) 823-8584 · Instagram @mgdetailingmn<br><br>
-  Site preview built for MG Detailing by Blankd Web Studio — $300 flat · live in 48 hours
+  <div class="wrap">
+    <div class="fbrand">MG Detailing</div>
+    Mobile Auto · Marine · Aviation — Twin Cities, MN · <a href="tel:6128238584">(612) 823-8584</a> · <a href="https://instagram.com/mgdetailingmn">@mgdetailingmn</a>
+    <div style="margin-top:14px;color:#6b6f77;font-size:.8rem">Site preview crafted for MG Detailing by Blankd Web Studio · $300 flat · live in 48 hours</div>
+  </div>
 </footer>
 
+<script>
+  // sticky header state
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>8),{passive:true});
+  // scroll reveal (progressive enhancement — content is visible without JS)
+  const els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){e.target.style.transitionDelay=(Math.min(i,4)*60)+'ms';e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(el=>io.observe(el));
+    // safety net: never let anything stay hidden
+    setTimeout(()=>els.forEach(el=>el.classList.add('in')),4000);
+  } else {
+    els.forEach(el=>el.classList.add('in'));
+  }
+</script>
 </body>
 </html>
