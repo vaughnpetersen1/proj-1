@@ -14,7 +14,10 @@ Two revenue engines targeting $200+/month net. Start at README.md and PLAN.md.
 ## House rules (boss-set, non-negotiable)
 1. No emojis on client-facing pages — inline SVG icons only (service/HOUSE-STYLE.md)
 2. Nothing ships to a lead/client with stock photos posing as their work
-3. Outreach voice: reads like a text from a real person (batch1_messages.md header)
+3. Outreach voice: reads like a text from a real person. FIRST message is ONE
+   question, under 25 words, no link, no price, no pitch (SHORT-DMS.md).
+   Pitch on msg 2 only after they reply. 3 people called our old 70-word
+   DMs automated — that was the #1 conversion blocker. (boss-set 2026-07-24)
 4. Placeholder prices/hours are always marked as placeholders on-page
 5. Never auto-send DMs / never automate the boss's social accounts (ban risk)
 6. Verify a lead has no website before sending a "you have no website" pitch
