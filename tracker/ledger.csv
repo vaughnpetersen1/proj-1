@@ -3,6 +3,4 @@ date,engine,type,description,amount
 2026-07-08,setup,expense,Instagram/Meta verification (outreach deliverability),-20.00
 2026-07-09,setup,expense,domain blankd.online,-2.00
 2026-07-10,flips,expense,Jagermeister mini fridge (FB Marketplace - negotiated 300 to 140),-140.00
-# NOTE 2026-07-29: buyer coming Fri Jul 31 to see the Jagermeister fridge.
-# Bought at -140.00. FLOOR = 140 (break even). Ask 220, settle 180+, walk-away 140.
-# FRIDGE SALE PENDING - log the actual number the same day.
+2026-07-30,flips,revenue,Jagermeister mini fridge SOLD (bought 140 / sold 200),200.00

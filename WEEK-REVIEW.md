@@ -9,9 +9,10 @@ Boss fills in the blanks (sends/replies), then we both grade.
 
 | Metric | Value |
 |---|---|
-| Revenue | **$0** |
+| Revenue | **$200** (fridge sold 2026-07-30) |
 | Spend to date | **-$182** (Claude Pro $20, Meta verify $20, domain $2, fridge $140) |
-| Net | **-$182** |
+| **Net** | **+$18 — first week above water** |
+| Flip profit | **+$60** on the fridge (bought 140, sold 200) |
 | Capital on hand | $2,000 (held — see DECISIONS.md) |
 | Leads in pipeline | **30 total** |
 | — untouched, ready to send | **20** |
@@ -69,10 +70,21 @@ not auto-sending email — all three protect us. Correctly diagnosed that the
 
 ---
 
+## THE WIN — first money in
+
+**Fridge sold for $200 on 7/30.** Bought at $140, so **+$60 profit**, and the
+operation is **net positive (+$18)** for the first time.
+
+Worth saying plainly: the boss was ready to dump it at $140 to cut losses,
+held the line instead, and got $200. That's a $60 swing from not
+negotiating against himself. Flip engine works — it's proven now, not theory.
+
 ## THE UNCOMFORTABLE TRUTH
 
-**19 days in, $0 revenue, 0 clients.** We have 9 finished websites sitting
-live that nobody has paid for, and 20 written messages nobody has received.
+**19 days in, 0 clients on the web engine.** We have 9 finished websites
+sitting live that nobody has paid for, and 20 written messages nobody has
+received. The $60 came from flipping, not from the thing we've spent 95% of
+our time building.
 
 The bottleneck has never been supply. It's sends. Every system built this week
 was designed to remove excuses from that one action — and the honest test of
