@@ -63,9 +63,12 @@ see the actual line, not vibes.
 |---|---|---|---|
 | 2026-07-30 | $634.48 | — | starting point |
 
-**Open question:** boss reported a $2,000 META position (entry 557.72) AND a
-$634.48 portfolio balance. These don't reconcile — needs clarifying before the
-next weekly log.
+**Holdings (2026-07-30):** 1 share META, entry $557.72, now $588.88 =
+**+$31.16 unrealized (+5.6%)**. Portfolio $634.48 = $588.88 META + ~$45.60 cash.
+
+**The $2,000 is no longer available to the business.** Bootstrapping from here —
+which was already the plan (see DECISIONS.md), so nothing about the strategy
+changes.
 
 ---
 
