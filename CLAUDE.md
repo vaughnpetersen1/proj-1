@@ -26,6 +26,10 @@ Two revenue engines targeting $200+/month net. Start at README.md and PLAN.md.
 9. Leads must be ACTIVE online — last social post within the past 12 months.
    No post in a year = dead business, skip it. Verify activity + no-website
    (rule 6) before a lead ever makes the list. (boss-set 2026-07-21)
+10. TARGET high-ticket only: one job worth $3,000+, already busy, wants more
+    work. NO barbers/salons/nail/beauty — too price-sensitive, said no
+    repeatedly. Pricing is $800 / $1,500 / $50-100 mo care plan, NOT $300.
+    See ICP.md. (boss-set 2026-07-30 after 512 said "too expensive")
 
 ## Platform constraints (learned the hard way — don't re-derive)
 - GitHub access is scoped per-session; proj-1 only unless add_repo succeeds.
