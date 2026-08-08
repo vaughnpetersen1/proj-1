@@ -97,3 +97,66 @@ presence.**
 - Verify provably active — house rule 9
 - Short human DMs — house rule 3
 - Build them a real mockup before/right after they reply. That part worked.
+
+---
+
+## GEOGRAPHIC LAYER (added 2026-08-08)
+
+Stacking three filters multiplies the odds. Each one alone is weak; together
+they point at the least-likely-to-have-a-website business in America.
+
+### Filter 1 — Niche (biggest lever)
+| Segment | No website |
+|---|---|
+| US small business average | **27%** |
+| **Certain trades** | **up to 60%** |
+
+Trades more than double the base rate. This matters more than any state.
+
+### Filter 2 — State (low AI / low digital adoption)
+Census BTOS 2026 AI adoption by state:
+
+| Lowest | Rate |
+|---|---|
+| **West Virginia** | **10.8%** (lowest in US) |
+| Mississippi, Arkansas, Kentucky, Alabama, Louisiana | low cluster |
+
+For contrast, highest: Colorado 23.2%, Arizona 22.9%, DC 22.5%.
+
+Low adoption = fewer competitors pitching them, and less likely to have
+already bought a site.
+
+### Filter 3 — Small towns, not the metro
+Skip Charleston, Jackson, Little Rock, Louisville. Target towns of
+5k-40k people. Metro contractors have marketing budgets and agencies.
+
+### The intersection
+**A concrete / roofing / excavation contractor in a small West Virginia,
+Mississippi, Arkansas or Kentucky town** is statistically the best target
+we can define.
+
+### Honest counterweights
+- Low AI adoption cuts both ways: less competition, but also lower tech
+  budgets and slower decisions. Same wall 512 hit, different state.
+- Out of state means losing "I'm local," which is a real trust cost with
+  contractors who buy on relationships. Not fatal (Kz's is WI, Christ
+  Centered is OK), but it is a cost.
+
+### Search strings that work (boss runs these in Google Maps)
+```
+concrete contractor Beckley WV
+excavation Princeton WV
+roofing Bluefield WV
+concrete Hattiesburg MS
+excavation Meridian MS
+roofing Jonesboro AR
+concrete Bowling Green KY
+excavation Somerset KY
+```
+Tap each result. **No "Website" button = lead.** Reviews in the last year =
+alive. That is the whole qualification.
+
+### Candidate found but UNVERIFIED
+- Mountaineer Concrete Contracting LLC — Nitro, WV. Facebook (758 likes) +
+  Thumbtack, no website found. No phone number located, activity unverified.
+  Boss should check the FB page before contacting.
