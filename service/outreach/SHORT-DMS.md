@@ -81,3 +81,46 @@ THE WHOLE POINT
 ════════════════════════════════════════
 Msg 1 gets a reply. Msg 2 shows the thing. Msg 3 names the price.
 Never all three at once. That's what made it look automated.
+
+---
+
+# NEW STANDING WORKFLOW (boss-set 2026-08-08)
+
+**Build the site FIRST, then send it with the opening message.** No more
+two-step "do you have a website?" then reveal.
+
+## Why we changed again
+Asking a question got "seen, no reply" three times running. Every actual
+reply we've had came from showing them something real with their name on it.
+And sitegen.py made building cheap — a site is now a config block, not 400
+hand-written lines, so there is no reason to hold it back.
+
+## What Claude needs to build one (30 seconds of boss's time)
+- Business name
+- Trade (concrete, roofing, remodel, detailing, etc.)
+- Town / area
+- Phone number
+- Anything distinctive (years in business, "we do boats too", family owned)
+
+Photos are optional — the page ships with clearly marked photo slots.
+
+## The new opener (still short, still one thought)
+
+> hey, made you something for [name]. mind if I send a link?
+
+Then send the link.
+
+Or send it in one shot when it feels natural:
+
+> hey — built out a website for [name] to show you what one could look like.
+> no catch, just want your take: [link]
+
+## Then
+- **"how much?"** -> contractors $1,500 · detailers $300. "one job pays for it."
+- **"can you change X?"** -> "that's what it's for. tell me and I'll update it today."
+- **quiet** -> ONE follow-up in 3 days, then stop.
+
+## The bar
+Every site must hit the premium standard (Fraunces/Inter, framed hero,
+real trade-appropriate copy). A cheap-looking site makes the pitch worse
+than sending nothing.
