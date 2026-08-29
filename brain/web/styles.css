@@ -60,6 +60,11 @@ header.topbar {
 }
 header.topbar h1 { font-size: 14px; margin: 0; letter-spacing: .1em; text-transform: uppercase; }
 header.topbar .spacer { flex: 1; }
+.freshness {
+  display: inline-flex; align-items: center; gap: 2px; font-size: 11px;
+  padding: 3px 9px; border: 1px solid var(--line-2); border-radius: 12px;
+  background: var(--bg-2); white-space: nowrap; max-width: 46vw; overflow: hidden;
+}
 .view { padding: 18px 20px; }
 
 /* ----------------------------------------------------------------- bits */

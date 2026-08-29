@@ -11,8 +11,9 @@ contradicts the source that suggested the rule.
 
 ```
 python3 -m pip install -r requirements.txt
-python3 -m tradingbrain.cli seed      # knowledge base, concepts, hypotheses, strategies
-python3 -m tradingbrain.cli serve     # http://127.0.0.1:8787
+python3 -m tradingbrain.cli seed              # knowledge base, concepts, hypotheses
+python3 -m tradingbrain.cli data bootstrap    # universe -> history -> features -> context
+python3 -m tradingbrain.cli serve             # http://127.0.0.1:8787
 ```
 
 ---
@@ -36,38 +37,87 @@ positive after 10 trading days"* — never *"63.4% chance"*. Every statistic sho
 its sample size, period, definition of success, data source and method. This is
 enforced in `tradingbrain/provenance.py`, not left to discipline.
 
-## The second thing: your data path
+## The second thing: the database is the source of truth
 
-The environment this was built in blocks outbound HTTPS to every market-data
-host, so **the default data path is a clearly-labelled synthetic generator.**
-Everything computed on it is stamped `SYNTHETIC` and every screen says so in
-plain language. It exercises the engines; it is not evidence about markets.
+**Nothing downloads market data to answer a question.** The system maintains its
+own continuously-updated store; engines read it, and only the ingestion service
+talks to a vendor.
 
-To get real data in, in order of preference:
+```
+PROVIDERS -> INGESTION -> VALIDATION -> DATABASE -> INDICATORS -> FEATURES
+                                            |
+                              SCREENER · BACKTESTER · AI BRAIN
+```
 
-1. **CSV drop (works offline).** Export from your broker, TC2000 or Norgate to
-   `data_cache/daily/<SYMBOL>.csv` with `date,open,high,low,close,volume`. The
-   `csv` provider picks them up with no key and no network.
-2. **An API key.** Set `TIINGO_API_KEY` or `POLYGON_API_KEY` (see `.env.example`).
-3. **Free, no key.** `stooq` and `yahoo` adapters are implemented and will light
-   up the moment outbound HTTPS to those hosts is permitted.
+- **Incremental by construction.** Missing ranges are computed against a real
+  NYSE calendar (validated against published session counts: 250/252/250 for
+  2023/24/25), merged into contiguous blocks, and batched 100 symbols per
+  request. A second backfill over a covered range makes **zero** vendor calls —
+  asserted in the tests.
+- **Precomputed features.** The screener runs one indexed SQL statement over
+  `strategy_features` instead of recomputing a 200-bar SMA per symbol per
+  request: ~0.1s for the whole universe, no API calls.
+- **Dataset versioning.** A backtest checksums every bar in scope before it
+  starts and stores the id, so a result stays reproducible after the store grows,
+  gets re-adjusted, or changes provider.
+- **Vendors never mix silently.** A bar already present from a different provider
+  is not overwritten; the conflict is counted and logged.
+- **Raw and derived are structurally separate.** No method in `MarketStore` can
+  write a computed value into a `market_data_*` table. Derived tables are
+  droppable and carry a feature version plus a hash of the parameters that made
+  them.
 
-`python3 -m tradingbrain.cli providers` tells you exactly which path is active
-and why each other one is not.
+`python3 -m tradingbrain.cli data status` (or the **Market Data** page) shows
+coverage, freshness, provider health, quality flags, API usage and locked
+datasets.
+
+### Alpaca, and the feed you are actually getting
+
+Alpaca is the first-class provider: historical bars, intraday, trades, quotes,
+corporate actions, options and a real-time WebSocket stream, behind
+`ALPACA_API_KEY` / `ALPACA_API_SECRET` / `ALPACA_DATA_FEED`. Credentials are
+backend-only and never reach the frontend.
+
+**A free Alpaca key streams IEX** — one exchange carrying a low single-digit
+share of consolidated US volume. Relative volume, liquidity and breakout-volume
+filters computed from it understate the real market. The system says so
+everywhere: the feed is stored on every bar, badged `PARTIAL` in the provider
+table, and shown in the header on every screen. `ALPACA_DATA_FEED=sip` switches
+to the consolidated tape with no code change.
+
+### If you have no keys
+
+The default path is a clearly-labelled **synthetic generator**, ingested through
+the same pipeline into the same tables. Everything computed on it is stamped
+`SYNTHETIC` and every screen says so. It exercises the machinery; it is not
+evidence about markets. CSV drop, Tiingo, Polygon, Stooq and Yahoo are all
+implemented alternatives — see [docs/DATA.md](docs/DATA.md).
 
 ---
 
 ## What is actually built
 
 ### Data layer
-- `MarketDataProvider` / `HistoricalDataProvider` / `IntradayDataProvider` /
-  `OptionsDataProvider` / `NewsProvider` / `SectorDataProvider` interfaces —
-  nothing above depends on a vendor.
-- Adapters: CSV cache, Stooq, Yahoo, Tiingo, Polygon, and the synthetic generator.
-- **Data-quality validation**: duplicate timestamps, OHLC inconsistency, calendar
-  gaps, non-positive prices, suspected unadjusted splits, zero-volume runs,
-  out-of-session intraday bars, plus a standing survivorship-bias disclosure that
-  no validator can detect from bars alone.
+- Ten provider protocols — `MarketData`, `Historical`, `Intraday`,
+  `RealtimeMarketData`, `Options`, `Fundamental`, `News`, `CorporateActions`,
+  `SymbolUniverse`, `Broker` — so nothing above depends on a vendor.
+- Adapters: **Alpaca** (bars, intraday, trades, quotes, corporate actions,
+  options, WebSocket stream, asset universe), Tiingo, Polygon, Stooq, Yahoo, CSV
+  cache, and the synthetic generator.
+- **Persistent store** (`market.db`): per-timeframe bar tables, raw ticks and
+  quotes, corporate actions, options contracts, sync status, quality flags, API
+  usage, ingestion log, dataset versions.
+- **Ingestion service**: gap-aware incremental backfill, batched requests,
+  provider fallback with recorded reasons, corporate-action and options sync.
+- **Real-time ingestion**: hand-written RFC 6455 WebSocket client (no
+  dependency, tested against a live socket server), full-jitter reconnect,
+  heartbeat, duplicate detection, gap detection, batched writes, and 1m→5m/15m/1h
+  derivation.
+- **Data-quality validation on ingest**: blocking errors are refused rather than
+  stored; warnings are flagged and surfaced. Duplicate timestamps, OHLC
+  inconsistency, calendar gaps against a real exchange calendar, non-positive
+  prices, suspected unadjusted splits, zero-volume runs, out-of-session bars,
+  plus a standing survivorship-bias disclosure.
 - A cross-sectional `Panel` so relative strength and breadth are computed against
   peers *on the same date*, never against a survivor list drawn from later.
 
@@ -143,6 +193,16 @@ Regime from index MA structure, drawdown, realised volatility and its percentile
 plus breadth. Sectors and themes ranked from **six** measurements converted to
 cross-group percentiles — never today's percentage gain — with every component
 shown next to the composite.
+
+### Screener (server-side, whole market)
+One indexed SQL statement over precomputed features — no vendor calls, no
+recomputation. 40+ filters covering price, liquidity, relative volume, ATR/ADR,
+RSI, all four SMAs and distances from them, prior moves over five horizons,
+consolidation length/depth/contraction, breakout proximity and volume, relative
+strength, sector and theme rank, and market regime. A `SAR preset` encodes the
+strategy screen. Filters the system cannot honour (market cap, earnings
+proximity, options liquidity) are **refused with the reason**, never silently
+dropped. Every run stores its exact configuration and a hash.
 
 ### Scanner and ranking
 Eight weighted components (regime, sector, theme, relative strength, prior
@@ -232,9 +292,17 @@ Stated plainly rather than faked:
   exists, but no intraday data source is reachable, so a comparison would run on
   generated intraday bars and prove nothing. Recorded as *blocked*, not as
   *unsupported*.
-- **No broker integration.** Live trading is off by default and cannot be enabled
-  by configuration alone: any adapter must pass every check in
-  `risk/guards.py`, including a per-order confirmation token.
+- **No fundamentals provider.** Market cap, float and shares outstanding are not
+  derivable from bars, so those screener filters are refused with the reason
+  rather than approximated.
+- **No earnings calendar.** "Days to earnings" would be a guess, so the filter is
+  refused. Finnhub would supply it; the protocol slot exists.
+- **Consolidated (SIP) data is a subscription, not a code change.** The adapter
+  and every label already handle it; the free tier gives IEX and says so.
+- **No broker integration.** Market data and execution are separate layers by
+  design (`MarketDataProvider` vs `BrokerProvider`). Live trading is off by
+  default and cannot be enabled by configuration alone: any adapter must pass
+  every check in `risk/guards.py`, including a per-order confirmation token.
 - **Alert delivery is in-app only.** Email/Discord/Telegram/SMS/browser channels
   are declared with what each needs; a channel that silently does nothing is
   worse than one that says it is not configured.
@@ -245,6 +313,15 @@ Stated plainly rather than faked:
 
 ```
 python3 -m tradingbrain.cli serve                    # the web app
+python3 -m tradingbrain.cli data bootstrap           # universe + history + features
+python3 -m tradingbrain.cli data status              # coverage, freshness, API usage
+python3 -m tradingbrain.cli data sync                # incremental: only what is new
+python3 -m tradingbrain.cli data backfill NVDA AAPL --start 2015-01-01
+python3 -m tradingbrain.cli data features            # recompute indicators + features
+python3 -m tradingbrain.cli data screen --preset sar # SQL screener
+python3 -m tradingbrain.cli data validate            # re-run every quality check
+python3 -m tradingbrain.cli data stream              # realtime WebSocket ingestion
+python3 -m tradingbrain.cli data datasets            # locked dataset versions
 python3 -m tradingbrain.cli providers                # which data path is active
 python3 -m tradingbrain.cli seed                     # knowledge, concepts, hypotheses
 python3 -m tradingbrain.cli regime | sectors | scan
@@ -261,8 +338,8 @@ python3 -m tradingbrain.cli demo-journal --clear     # fill the journal with SAM
 ## Tests
 
 ```
-python3 -m pytest            # 148 unit tests, ~4s
-python3 -m pytest -m slow    # 11 end-to-end tests over the generated universe, ~48s
+python3 -m pytest            # 219 unit tests, ~7s
+python3 -m pytest -m slow    # 16 end-to-end tests over the generated universe, ~54s
 ```
 
 The tests that matter most:
@@ -276,6 +353,16 @@ The tests that matter most:
   fast path and the readable path agree bar for bar.
 - `test_integration.py::test_equity_change_reconciles_with_trade_pnl`
 - `test_research.py::test_unverified_sources_store_no_quote`
+- `test_market_data.py::test_backfill_then_incremental_asks_for_nothing` — a
+  covered range costs zero vendor calls.
+- `test_market_data.py::test_a_second_provider_cannot_silently_overwrite`
+- `test_market_data.py::test_changing_the_data_changes_the_dataset_id`
+- `test_websocket.py` — the hand-rolled WebSocket client against a real server:
+  masking, fragmentation, ping/pong, close codes, abrupt disconnect.
+- `test_alpaca.py::test_iex_is_never_described_as_full_market`
+- `test_integration.py::test_engines_read_the_store_without_spending_api_calls`
+- `test_integration.py::test_scanner_fast_and_slow_paths_agree` — the
+  precomputed path means the same thing as recomputing from bars.
 
 ## Configuration
 
@@ -297,7 +384,10 @@ brain/
   tradingbrain/
     provenance.py       evidence classes, Claim, phrasing rules
     config.py           settings from the environment
-    data/               types, panel, quality, providers/
+    data/               types, panel, quality, providers/ (alpaca, wsclient, …)
+    marketstore/        schema.sql · store.py · calendar.py · repository.py
+    ingest/             service · realtime · features · derived
+    screener/           sql_screener.py
     indicators/         core.py (vectorised) · structure.py (setup detectors)
     strategy/           spec.py (data, not code) · evaluator.py · library.py
     backtest/           engine · metrics · walkforward · montecarlo · sensitivity
@@ -308,7 +398,7 @@ brain/
     api/app.py          stdlib HTTP server
     cli.py
   web/                  dark research terminal, no build step, no CDN
-  tests/                159 tests
+  tests/                235 tests
 ```
 
 ## The mindset this encodes

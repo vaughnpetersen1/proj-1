@@ -78,6 +78,48 @@ def main(argv: list[str] | None = None) -> int:
     al = sub.add_parser("alerts", help="evaluate alerts")
     al.add_argument("--evaluate", action="store_true")
 
+    dt_ = sub.add_parser("data", help="market-data infrastructure")
+    dsub = dt_.add_subparsers(dest="dcmd", required=True)
+    dsub.add_parser("status", help="providers, coverage, freshness, quality, API usage")
+    db = dsub.add_parser("bootstrap", help="universe + history + features + context")
+    db.add_argument("--years", type=float)
+    db.add_argument("--symbols", help="comma-separated; default is the whole universe")
+    db.add_argument("--max-symbols", type=int)
+    du = dsub.add_parser("universe", help="refresh the tradeable symbol list")
+    du.add_argument("--provider")
+    du.add_argument("--max-symbols", type=int)
+    dbf = dsub.add_parser("backfill", help="fetch only the bars the store is missing")
+    dbf.add_argument("symbols", nargs="*", help="blank = every symbol in the universe")
+    dbf.add_argument("--timeframe", default="1d")
+    dbf.add_argument("--start"); dbf.add_argument("--end")
+    dbf.add_argument("--provider"); dbf.add_argument("--force", action="store_true")
+    dsy = dsub.add_parser("sync", help="incremental: only what happened since the last bar")
+    dsy.add_argument("--timeframe", default="1d")
+    dsy.add_argument("--symbols")
+    dfe = dsub.add_parser("features", help="recompute indicators and strategy features")
+    dfe.add_argument("--symbols"); dfe.add_argument("--bars", type=int,
+                                                    help="only recompute the last N bars")
+    dsub.add_parser("context", help="compute and store market regime + sector ranks")
+    dctx = dsub.add_parser("context-history", help="backfill stored regime history")
+    dctx.add_argument("--start", default="2015-01-01")
+    dctx.add_argument("--step", type=int, default=5)
+    dv = dsub.add_parser("validate", help="re-run every quality check over the store")
+    dv.add_argument("--timeframe", default="1d")
+    dca = dsub.add_parser("corporate-actions", help="fetch splits and dividends")
+    dca.add_argument("symbols", nargs="*")
+    dop = dsub.add_parser("options", help="snapshot an options chain into the store")
+    dop.add_argument("symbol")
+    dsc = dsub.add_parser("screen", help="run the SQL screener over stored features")
+    dsc.add_argument("--preset", default="sar", choices=["sar", "none"])
+    dsc.add_argument("--limit", type=int, default=20)
+    dsub.add_parser("datasets", help="list locked dataset versions")
+    dcl = dsub.add_parser("clear", help="drop derived tables (raw data is untouched)")
+    dcl.add_argument("--what", default="all",
+                     choices=["all", "indicators", "features", "regimes", "sectors", "scans"])
+    drt = dsub.add_parser("stream", help="run the realtime ingestion service")
+    drt.add_argument("--symbols")
+    drt.add_argument("--seconds", type=int, default=0, help="0 = run until interrupted")
+
     sub.add_parser("demo", help="seed and exercise every engine end to end")
 
     dj = sub.add_parser("demo-journal",
@@ -177,6 +219,9 @@ def main(argv: list[str] | None = None) -> int:
         _print(evaluate_alerts() if args.evaluate else list_alerts())
         return 0
 
+    if args.cmd == "data":
+        return _data_command(args)
+
     if args.cmd == "demo":
         _print(demo())
         return 0
@@ -186,6 +231,124 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     return 1
+
+
+def _data_command(args) -> int:
+    import datetime as _dt
+    from .ingest import INGEST, FEATURES, REALTIME, backfill_context, refresh_context
+    from .marketstore.store import MARKET
+    from .screener.sql_screener import SAR_PRESET, run_screen
+
+    def syms(raw: str | None) -> list[str] | None:
+        return [s.strip().upper() for s in raw.split(",") if s.strip()] if raw else None
+
+    if args.dcmd == "status":
+        _print(data_status())
+    elif args.dcmd == "bootstrap":
+        _print(bootstrap_data(years=args.years, symbols=syms(args.symbols),
+                              max_symbols=args.max_symbols))
+    elif args.dcmd == "universe":
+        _print(INGEST.sync_universe(args.provider, args.max_symbols))
+    elif args.dcmd == "backfill":
+        target = [s.upper() for s in args.symbols] or MARKET.symbol_list()
+        _print(INGEST.backfill(target, args.timeframe,
+                               _dt.date.fromisoformat(args.start) if args.start else None,
+                               _dt.date.fromisoformat(args.end) if args.end else None,
+                               args.provider, args.force))
+    elif args.dcmd == "sync":
+        _print(INGEST.incremental_sync(args.timeframe, syms(args.symbols)))
+    elif args.dcmd == "features":
+        _print(FEATURES.compute_universe(syms(args.symbols), lookback_bars=args.bars))
+    elif args.dcmd == "context":
+        _print(refresh_context())
+    elif args.dcmd == "context-history":
+        _print(backfill_context(_dt.date.fromisoformat(args.start), step_days=args.step))
+    elif args.dcmd == "validate":
+        _print(INGEST.validate_store(args.timeframe))
+    elif args.dcmd == "corporate-actions":
+        _print(INGEST.sync_corporate_actions(
+            [s.upper() for s in args.symbols] or MARKET.symbol_list()))
+    elif args.dcmd == "options":
+        _print(INGEST.sync_options(args.symbol))
+    elif args.dcmd == "screen":
+        filters = dict(SAR_PRESET) if args.preset == "sar" else {"min_price": 1.0}
+        r = run_screen(filters, limit=args.limit, strategy="cli")
+        _print({k: v for k, v in r.items() if k != "results"})
+        for row in r.get("results", []):
+            print(f"  {row['symbol']:6s} q={row.get('base_quality')} "
+                  f"prior={row.get('prior_move_pct')} dist={row.get('breakout_distance_pct')}")
+    elif args.dcmd == "datasets":
+        _print(MARKET.dataset_versions())
+    elif args.dcmd == "clear":
+        _print(MARKET.clear_derived(args.what))
+    elif args.dcmd == "stream":
+        res = REALTIME.start(syms(args.symbols))
+        _print(res)
+        if res.get("ok"):
+            import time as _t
+            try:
+                deadline = _t.time() + args.seconds if args.seconds else None
+                while REALTIME.is_running():
+                    _t.sleep(2)
+                    if deadline and _t.time() > deadline:
+                        break
+            except KeyboardInterrupt:
+                pass
+            _print(REALTIME.stop())
+    return 0
+
+
+def data_status() -> dict[str, Any]:
+    """Everything the Data Control Center shows, also available from the shell."""
+    from .data.providers.registry import HUB, provider_status
+    from .ingest import REALTIME
+    from .marketstore.store import MARKET
+    stats = MARKET.stats()
+    return {
+        "providers": provider_status(),
+        "active_read_path": HUB.active_daily_provider(),
+        "data_note": HUB.data_note(),
+        "freshness": MARKET.freshness("1d"),
+        "database": stats,
+        "features": MARKET.feature_coverage(),
+        "sync": MARKET.sync_status(limit=25),
+        "quality_flags": MARKET.flags(limit=25),
+        "api_usage_24h": MARKET.api_usage(24),
+        "realtime": REALTIME.status(),
+        "recent_log": MARKET.logs(limit=25),
+        "datasets": MARKET.dataset_versions(10),
+    }
+
+
+def bootstrap_data(years: float | None = None, symbols: list[str] | None = None,
+                   max_symbols: int | None = None) -> dict[str, Any]:
+    """Universe -> history -> features -> context, in one call.
+
+    Every step is incremental, so running it twice costs almost nothing: the
+    backfill asks only for missing ranges and the feature pass overwrites the
+    same rows.
+    """
+    import time as _t
+    from .ingest import INGEST, FEATURES, refresh_context
+    from .marketstore.store import MARKET
+    t0 = _t.time()
+    out: dict[str, Any] = {}
+    out["universe"] = INGEST.sync_universe(max_symbols=max_symbols)
+    target = symbols or MARKET.symbol_list()
+    if max_symbols:
+        target = target[:max_symbols]
+    start = INGEST.default_start(years)
+    out["backfill"] = {k: v for k, v in INGEST.backfill(target, "1d", start).items()
+                       if k != "results"}
+    out["features"] = {k: v for k, v in
+                       FEATURES.compute_universe(target).items() if k != "skipped_detail"}
+    out["context"] = refresh_context()
+    out["database"] = MARKET.stats()
+    out["seconds"] = round(_t.time() - t0, 1)
+    out["next"] = ("`cli data status` for coverage and freshness; "
+                   "`cli data screen` to run the SQL screener; "
+                   "`cli serve` for the web app.")
+    return out
 
 
 def seed_all() -> dict[str, Any]:

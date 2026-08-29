@@ -9,7 +9,8 @@ from __future__ import annotations
 
 import abc
 import datetime as dt
-from typing import Any, Protocol, runtime_checkable
+import threading
+from typing import Any, Callable, Protocol, runtime_checkable
 
 from ..types import PriceSeries, Timeframe
 
@@ -46,6 +47,9 @@ class Provider(abc.ABC):
             ("news", NewsProvider),
             ("sectors", SectorDataProvider),
             ("quotes", MarketDataProvider),
+            ("realtime", RealtimeMarketDataProvider),
+            ("corporate_actions", CorporateActionsProvider),
+            ("universe", SymbolUniverseProvider),
         ):
             if isinstance(self, base):
                 caps.add(cap)
@@ -71,6 +75,34 @@ class MarketDataProvider(Provider):
     def quote(self, symbol: str) -> dict[str, Any]: ...
 
 
+class RealtimeMarketDataProvider(Provider):
+    """Streaming trades/quotes/bars.
+
+    The contract is a callback pump, not a generator, so the ingestion service
+    owns the reconnect loop and the provider only has to know the wire format.
+    ``feed_label`` must state exactly what the stream covers -- a free Alpaca
+    key streams IEX only, which is a fraction of consolidated US volume, and
+    calling that "real-time market data" without qualification is how a scanner
+    silently ends up wrong.
+    """
+
+    @abc.abstractmethod
+    def feed_label(self) -> str: ...
+
+    @abc.abstractmethod
+    def stream(self, symbols: list[str], on_message: Callable[[dict[str, Any]], None],
+               channels: tuple[str, ...] = ("bars",),
+               stop: "threading.Event | None" = None) -> None:
+        """Block, pumping decoded messages into ``on_message`` until ``stop`` is set."""
+
+
+class CorporateActionsProvider(Provider):
+    @abc.abstractmethod
+    def corporate_actions(self, symbol: str, start: dt.date | None = None,
+                          end: dt.date | None = None) -> list[dict[str, Any]]:
+        """Splits, dividends and similar, each with an effective date and a factor."""
+
+
 class OptionsDataProvider(Provider):
     @abc.abstractmethod
     def chain(self, symbol: str, expiration: dt.date | None = None) -> list[dict[str, Any]]: ...
@@ -93,6 +125,14 @@ class SectorDataProvider(Provider):
     @abc.abstractmethod
     def sector_map(self) -> dict[str, str]:
         """symbol -> sector name."""
+
+
+class SymbolUniverseProvider(Provider):
+    """The tradeable universe, so the screener is not limited to a watchlist."""
+
+    @abc.abstractmethod
+    def list_symbols(self, active_only: bool = True) -> list[dict[str, Any]]:
+        """Rows of {symbol, name, exchange, asset_class, tradable, status, ...}."""
 
 
 @runtime_checkable

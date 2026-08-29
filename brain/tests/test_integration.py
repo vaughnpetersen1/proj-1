@@ -146,3 +146,86 @@ def test_demo_command_exercises_every_engine():
     failed = [s for s in r["steps"] if not s["ok"]]
     assert not failed, failed
     assert r["ok"]
+
+
+# ---------------------------------------------------------------------------
+# market-data infrastructure, end to end over the populated store
+# ---------------------------------------------------------------------------
+
+def _store_populated() -> bool:
+    from tradingbrain.marketstore.store import MARKET
+    return MARKET.feature_coverage()["symbols"] >= 5
+
+
+def test_backtest_locks_a_dataset_and_records_reproducible_provenance(panel):
+    from tradingbrain.backtest.engine import Backtester
+    from tradingbrain.marketstore.store import MARKET
+    from tradingbrain.strategy.library import get_strategy
+    r = Backtester(get_strategy("sar_v1_0"), start=dt.date(2020, 1, 1),
+                   panel=panel).run()
+    p = r.provenance
+    for key in ("strategy", "strategy_fingerprint", "provider", "data_origin",
+                "costs", "locked_at", "timeframe", "universe_size"):
+        assert key in p, f"provenance is missing {key}"
+    if p.get("dataset_version_id"):
+        ds = MARKET.dataset_version(p["dataset_version_id"])
+        assert ds and ds["checksum"] == p["dataset_checksum"]
+        assert ds["row_count"] > 0
+        assert ds["adjustment"]
+
+
+def test_backtest_reruns_reuse_the_same_dataset_version(panel):
+    from tradingbrain.backtest.engine import Backtester
+    from tradingbrain.strategy.library import get_strategy
+    spec = get_strategy("sar_v1_0")
+    a = Backtester(spec, start=dt.date(2021, 1, 1), panel=panel).run()
+    b = Backtester(spec, start=dt.date(2021, 1, 1), panel=panel).run()
+    assert a.provenance.get("dataset_checksum") == b.provenance.get("dataset_checksum")
+    assert a.metrics["n_trades"] == b.metrics["n_trades"]
+
+
+@pytest.mark.skipif(not _store_populated(),
+                    reason="needs a populated market store (cli data bootstrap)")
+def test_scanner_fast_and_slow_paths_agree():
+    """The precomputed path must mean the same thing as recomputing from bars."""
+    from tradingbrain.scanner.scan import ScanConfig, run_scan
+    fast = run_scan(ScanConfig(limit=15, use_precomputed_features=True))
+    slow = run_scan(ScanConfig(limit=15, use_precomputed_features=False))
+    assert fast["engine"].startswith("precomputed")
+    assert slow["engine"].startswith("recomputed")
+    assert [c["symbol"] for c in fast["results"]] == [c["symbol"] for c in slow["results"]]
+    for a, b in zip(fast["results"], slow["results"]):
+        assert abs(a["score"] - b["score"]) < 1.0, (a["symbol"], a["score"], b["score"])
+
+
+@pytest.mark.skipif(not _store_populated(),
+                    reason="needs a populated market store (cli data bootstrap)")
+def test_screener_is_faster_than_recomputing_and_returns_the_same_names():
+    import time
+    from tradingbrain.scanner.scan import ScanConfig, run_scan
+    from tradingbrain.screener.sql_screener import SAR_PRESET, run_screen
+
+    t0 = time.time()
+    screen = run_screen(SAR_PRESET, limit=50, save=False)
+    sql_seconds = time.time() - t0
+    assert screen["ok"]
+    assert sql_seconds < 2.0, f"a precomputed screen took {sql_seconds:.2f}s"
+
+    scan = run_scan(ScanConfig(limit=50, use_precomputed_features=False))
+    scanned = {c["symbol"] for c in scan["results"] if c["state"] == "approaching"}
+    matched = {r["symbol"] for r in screen["results"]}
+    # the screener is a superset filter of the scanner's setup gates
+    assert matched & scanned, (matched, scanned)
+
+
+@pytest.mark.skipif(not _store_populated(),
+                    reason="needs a populated market store (cli data bootstrap)")
+def test_engines_read_the_store_without_spending_api_calls():
+    from tradingbrain.marketstore.store import MARKET
+    from tradingbrain.scanner.scan import ScanConfig, run_scan
+    from tradingbrain.screener.sql_screener import SAR_PRESET, run_screen
+    before = MARKET.one("SELECT COUNT(*) n FROM api_usage")["n"]
+    run_screen(SAR_PRESET, limit=20, save=False)
+    run_scan(ScanConfig(limit=10))
+    after = MARKET.one("SELECT COUNT(*) n FROM api_usage")["n"]
+    assert after == before, "reading the store must not call a vendor"

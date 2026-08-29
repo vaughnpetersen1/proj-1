@@ -263,8 +263,10 @@ def run_backtest_tool(strategy_key: str = "sar_v1_0", start: str | None = None,
             label=f"{spec.name} v{spec.version}", spec=spec.to_dict(), metrics=r.metrics,
             trades=[t.to_dict() for t in r.trades][:2000], equity_curve=r.equity_curve,
             data_origin=r.data_origin, data_provider=r.data_provider,
-            warnings=r.warnings, runtime_seconds=r.runtime_seconds)
-    return {"backtest_id": bid, "strategy": f"{spec.name} v{spec.version}",
+            warnings=r.warnings, dataset_version_id=r.provenance.get("dataset_version_id"),
+            provenance=r.provenance, runtime_seconds=r.runtime_seconds)
+    return {"backtest_id": bid, "provenance": r.provenance,
+            "strategy": f"{spec.name} v{spec.version}",
             "start": r.start, "end": r.end, "metrics": r.metrics,
             "signals_generated": r.signals_generated,
             "signals_rejected": r.signals_rejected,
@@ -456,8 +458,41 @@ def system_status() -> dict[str, Any]:
 
 # ---------------------------------------------------------------------------
 
+def data_status_tool() -> dict[str, Any]:
+    """Coverage, freshness, provider health and API usage of the market database."""
+    from ..cli import data_status
+    d = data_status()
+    d["log"] = d["recent_log"][:5]
+    d.pop("recent_log", None)
+    return d
+
+
+def screen_market(filters: dict[str, Any] | None = None, preset: str | None = "sar",
+                  limit: int = 25, as_of: str | None = None) -> dict[str, Any]:
+    """Run the SQL screener over precomputed features. Makes no vendor API calls."""
+    from ..screener.sql_screener import SAR_PRESET, run_screen
+    f = dict(SAR_PRESET) if preset == "sar" else {}
+    f.update(filters or {})
+    return run_screen(f, _date(as_of), limit, themes=HUB.themes(), strategy="ai")
+
+
+def sync_market_data(symbols: list[str] | None = None, timeframe: str = "1d",
+                     incremental: bool = True) -> dict[str, Any]:
+    """Fetch missing bars into the local store. The only tool that spends API calls."""
+    from ..ingest import INGEST
+    from ..marketstore.store import MARKET
+    target = symbols or MARKET.symbol_list()
+    res = (INGEST.incremental_sync(timeframe, target) if incremental
+           else INGEST.backfill(target, timeframe))
+    res.pop("results", None)
+    return res
+
+
 TOOLS: dict[str, Callable[..., Any]] = {
     "get_market_data": get_market_data,
+    "data_status": data_status_tool,
+    "screen_market": screen_market,
+    "sync_market_data": sync_market_data,
     "get_historical_data": get_historical_data,
     "get_intraday_data": get_intraday_data,
     "get_options_chain": get_options_chain,

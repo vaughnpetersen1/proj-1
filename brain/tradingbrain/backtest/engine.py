@@ -114,6 +114,9 @@ class BacktestResult:
     warnings: list[str]
     data_origin: str
     data_provider: str
+    #: Everything needed to reproduce this run: dataset id and checksum, feed,
+    #: adjustment methodology, universe, strategy version, costs, timestamp.
+    provenance: dict[str, Any]
     runtime_seconds: float
     bars_processed: int
     signals_generated: int
@@ -141,7 +144,10 @@ class BacktestResult:
             definition_of_success="a closed trade with positive net P/L after costs",
             data_source=self.data_provider,
             data_origin=DataOrigin(self.data_origin),
-            methodology=("Event-driven daily simulation. Signals read bars <= t; default "
+            methodology=(f"Dataset version {self.provenance.get('dataset_version_id')} "
+                         f"(checksum {str(self.provenance.get('dataset_checksum'))[:12]}, "
+                         f"{self.provenance.get('adjustment')}). "
+                         "Event-driven daily simulation. Signals read bars <= t; default "
                          "fill is the next open. Stops fill at the open when the bar gaps "
                          "through them. When a bar contains both the stop and a target, the "
                          "stop is assumed first. Slippage "
@@ -158,8 +164,13 @@ class Backtester:
                  start: dt.date | None = None, end: dt.date | None = None,
                  symbols: Iterable[str] | None = None,
                  panel: Panel | None = None,
-                 progress: bool = False) -> None:
+                 progress: bool = False, lock_dataset: bool = True,
+                 ensure_data: bool | None = None) -> None:
         spec.validate()
+        self.lock_dataset = lock_dataset
+        self.ensure_data = (hub.settings.allow_ondemand_backfill
+                            if ensure_data is None else ensure_data)
+        self.provenance: dict[str, Any] = {}
         self.spec = spec
         self.hub = hub
         self.start = start
@@ -179,6 +190,14 @@ class Backtester:
 
     # -- setup -------------------------------------------------------------
     def _prepare(self) -> None:
+        if self.ensure_data:
+            # Pre-flight: make the local store hold the window this run needs, so
+            # nothing reaches for a vendor once the simulation is under way.
+            report = self.hub.ensure(list(self.symbols), "1d", self.start, self.end)
+            if report.get("rows_written"):
+                self.warnings.append(
+                    f"Pre-flight backfill wrote {report['rows_written']} bars from "
+                    f"{report.get('provider')} before the run started.")
         origin_seen: set[str] = set()
         for sym in list(self.symbols):
             try:
@@ -207,6 +226,7 @@ class Backtester:
 
         note = survivorship_note(f"{len(self.symbols)} symbols from the active data path")
         self.warnings.append(note.detail)
+        self._lock_dataset()
         if self.data_origin == "SYNTHETIC":
             self.warnings.append(
                 "Data origin is SYNTHETIC. These results exercise the engine; they are not "
@@ -246,6 +266,61 @@ class Backtester:
                     if not vals:
                         continue
                     self.market_ok[d] = all(vals) if mf.mode == "both" else any(vals)
+
+    def _lock_dataset(self) -> None:
+        """Freeze the exact bars this run will use, before it starts.
+
+        Without this, a result cannot be reproduced: the store keeps growing, a
+        re-adjustment changes prices, and a provider switch changes them again.
+        The dataset id and checksum pin the run to the bytes it actually saw.
+        """
+        from ..marketstore.store import MARKET
+        costs = {"slippage_bps": self.spec.costs.slippage_bps,
+                 "commission_per_share": self.spec.costs.commission_per_share,
+                 "commission_min": self.spec.costs.commission_min,
+                 "gap_fills_at_open": self.spec.costs.gap_fills_at_open}
+        base = {
+            "strategy": f"{self.spec.name} v{self.spec.version}",
+            "strategy_fingerprint": self.spec.fingerprint(),
+            "timeframe": "1d",
+            "universe_size": len(self.symbols),
+            "start": self.start.isoformat() if self.start else None,
+            "end": self.end.isoformat() if self.end else None,
+            "provider": self.data_provider,
+            "data_origin": self.data_origin,
+            "costs": costs,
+            "locked_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+        }
+        if not self.lock_dataset or not self.symbols:
+            base["dataset_version_id"] = None
+            base["dataset_note"] = ("Dataset was not locked for this run, so the exact "
+                                    "bars cannot be pinned. Results are not reproducible "
+                                    "against a changing store.")
+            self.provenance = base
+            self.warnings.append(base["dataset_note"])
+            return
+        try:
+            adjusted = all(self.data[s].series.adjusted for s in self.symbols
+                           if s in self.data)
+            feeds = {w.split("=", 1)[1] for s in self.symbols if s in self.data
+                     for w in self.data[s].series.warnings if w.startswith("feed=")}
+            ds = MARKET.lock_dataset(
+                symbols=self.symbols, timeframe="1d", start=self.start, end=self.end,
+                provider=self.data_provider, feed=(next(iter(feeds)) if len(feeds) == 1
+                                                   else None),
+                origin=self.data_origin,
+                adjustment="split_and_dividend" if adjusted else "none_or_unknown",
+                label=f"{self.spec.name} v{self.spec.version}")
+            base.update(dataset_version_id=ds["id"], dataset_checksum=ds["checksum"],
+                        dataset_rows=ds["row_count"], dataset_reused=ds["reused"],
+                        feed=ds["feed"], adjustment=ds["adjustment"])
+        except Exception as exc:                              # noqa: BLE001
+            base["dataset_version_id"] = None
+            base["dataset_error"] = f"{type(exc).__name__}: {exc}"
+            self.warnings.append(
+                "Dataset could not be locked (" + base["dataset_error"] + "); this run "
+                "is not reproducible against a changing store.")
+        self.provenance = base
 
     # -- helpers -----------------------------------------------------------
     def _market_allows(self, day: dt.date) -> bool:
@@ -579,7 +654,8 @@ class Backtester:
             end=dates[-1].isoformat() if dates else "",
             symbols=self.symbols, trades=trades, equity_curve=curve, metrics=metrics,
             warnings=self.warnings, data_origin=self.data_origin,
-            data_provider=self.data_provider, runtime_seconds=round(runtime, 2),
+            data_provider=self.data_provider, provenance=self.provenance,
+            runtime_seconds=round(runtime, 2),
             bars_processed=bars, signals_generated=getattr(self, "_sig_count", 0),
             signals_rejected=dict(sorted(self.rejects.items(), key=lambda kv: -kv[1])))
 

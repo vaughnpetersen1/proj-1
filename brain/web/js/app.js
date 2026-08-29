@@ -3,11 +3,13 @@ import { api, h, pill } from './util.js';
 import { dashboard, markets, scanner, analyzer } from './views1.js';
 import { research, builder, backtester, knowledge } from './views2.js';
 import { options, journal, brain, settings } from './views3.js';
+import { dataCenter, screener, freshnessSummary } from './views4.js';
 
 const VIEWS = [
   { id: 'dashboard', label: 'Dashboard', fn: dashboard },
   { id: 'markets', label: 'Markets', fn: markets },
   { id: 'scanner', label: 'Scanner', fn: scanner },
+  { id: 'screener', label: 'Screener', fn: screener },
   { id: 'analyzer', label: 'Trade Analyzer', fn: analyzer },
   { id: 'research', label: 'Research Lab', fn: research },
   { id: 'builder', label: 'Strategy Builder', fn: builder },
@@ -16,6 +18,7 @@ const VIEWS = [
   { id: 'journal', label: 'Trade Journal', fn: journal },
   { id: 'brain', label: 'AI Brain', fn: brain },
   { id: 'knowledge', label: 'Knowledge Base', fn: knowledge },
+  { id: 'data', label: 'Market Data', fn: dataCenter },
   { id: 'settings', label: 'Settings', fn: settings },
 ];
 
@@ -74,6 +77,33 @@ api('/api/status').then(s => {
 }).catch(() => {
   document.getElementById('navfoot').textContent = 'backend unreachable';
 });
+
+/* The data-status indicator. The operator must always be able to see how fresh
+   the data is and which feed produced it, from every screen. */
+async function refreshFreshness() {
+  const el = document.getElementById('freshness');
+  if (!el) return;
+  try {
+    const f = await api('/api/data/freshness');
+    const s = freshnessSummary(f);
+    const dot = { live: '#35c47a', recent: '#4da3ff', delayed: '#ffb648',
+                  stale: '#ff5c6c', synthetic: '#b06bff', unknown: '#5d6879' }[s.level];
+    el.replaceChildren(
+      h('span', { style: `color:${dot};font-size:15px;line-height:1` }, '\u25CF'),
+      h('span', { class: 'mono', style: 'margin-left:5px' }, s.label),
+      h('span', { class: 'faint mono', style: 'margin-left:8px' }, s.detail || ''));
+    el.title = (s.full_market === false
+      ? 'Partial-coverage feed: not consolidated US market data. '
+      : '') + JSON.stringify(f.providers || []);
+    el.style.cursor = 'pointer';
+    el.onclick = () => ctx.go('data');
+  } catch {
+    el.replaceChildren(h('span', { class: 'faint' }, 'data status unavailable'));
+  }
+}
+ctx.refreshFreshness = refreshFreshness;
+refreshFreshness();
+setInterval(refreshFreshness, 60_000);
 
 const [v0, p0] = parseHash();
 render(v0, p0);

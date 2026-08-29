@@ -116,6 +116,11 @@ CREATE TABLE IF NOT EXISTS backtests (
     id            INTEGER PRIMARY KEY,
     strategy_id   INTEGER REFERENCES strategies(id) ON DELETE SET NULL,
     label         TEXT,
+    -- Points at market.db's dataset_versions row. Not a foreign key: the two
+    -- databases are deliberately separate, so the id is carried by value and
+    -- `provenance` keeps a self-contained copy of what mattered.
+    dataset_version_id INTEGER,
+    provenance    TEXT,
     spec          TEXT NOT NULL,
     metrics       TEXT NOT NULL,
     trades        TEXT,

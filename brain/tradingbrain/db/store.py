@@ -42,9 +42,29 @@ class Store:
             self._local.conn = c
         return c
 
+    #: Columns added after the first release. `CREATE TABLE IF NOT EXISTS` will not
+    #: add a column to a database that already exists, so new ones are applied
+    #: here. Additive only: nothing is dropped or retyped, so an older database
+    #: keeps working and a rollback stays possible.
+    MIGRATIONS: tuple[tuple[str, str, str], ...] = (
+        ("backtests", "dataset_version_id", "INTEGER"),
+        ("backtests", "provenance", "TEXT"),
+    )
+
     def init_schema(self) -> None:
         self.conn.executescript(SCHEMA.read_text())
         self.conn.commit()
+        self._migrate()
+
+    def _migrate(self) -> None:
+        for table, column, decl in self.MIGRATIONS:
+            try:
+                cols = {r["name"] for r in self.query(f"PRAGMA table_info({table})")}
+            except sqlite3.OperationalError:
+                continue                       # table not created yet on a fresh file
+            if cols and column not in cols:
+                self.conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {decl}")
+                self.conn.commit()
 
     def execute(self, sql: str, params: Sequence[Any] = ()) -> sqlite3.Cursor:
         cur = self.conn.execute(sql, params)
@@ -242,7 +262,7 @@ class Store:
     # -- backtests ---------------------------------------------------------
     def save_backtest(self, **kw: Any) -> int:
         kw.setdefault("created_at", _now())
-        for k in ("spec", "metrics", "trades", "equity_curve", "warnings"):
+        for k in ("spec", "metrics", "trades", "equity_curve", "warnings", "provenance"):
             if isinstance(kw.get(k), (dict, list)):
                 kw[k] = json.dumps(kw[k])
         return self.insert("backtests", kw)
@@ -250,15 +270,18 @@ class Store:
     def backtests(self, limit: int = 100) -> list[dict[str, Any]]:
         rows = self.query(
             "SELECT id,strategy_id,label,metrics,data_origin,data_provider,created_at,"
-            "runtime_seconds FROM backtests ORDER BY id DESC LIMIT ?", (limit,))
+            "runtime_seconds,dataset_version_id,provenance FROM backtests "
+            "ORDER BY id DESC LIMIT ?", (limit,))
         for r in rows:
             r["metrics"] = _dec(r["metrics"])
+            r["provenance"] = _dec(r.get("provenance"))
         return rows
 
     def backtest(self, bid: int) -> dict[str, Any] | None:
         r = self.one("SELECT * FROM backtests WHERE id=?", (bid,))
         if r:
-            for k in ("spec", "metrics", "trades", "equity_curve", "warnings"):
+            for k in ("spec", "metrics", "trades", "equity_curve", "warnings",
+                      "provenance"):
                 r[k] = _dec(r.get(k))
         return r
 

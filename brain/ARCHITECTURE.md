@@ -6,11 +6,35 @@
                               config.py
                                    |
    +-------------------------------+-------------------------------+
-   |                          DATA LAYER                           |
-   |  providers/{csv,stooq,yahoo,tiingo,polygon,synthetic}         |
-   |  -> registry.DataHub  (first configured AND reachable wins)   |
+   |                       PROVIDER LAYER                          |
+   |  providers/{alpaca,tiingo,polygon,stooq,yahoo,csv,synthetic}  |
+   |  protocols: MarketData · Historical · Intraday · Realtime     |
+   |             Options · Fundamental · News · CorporateActions   |
+   |             SymbolUniverse · Broker                           |
+   +-------------------------------+-------------------------------+
+                                   |  (only ingest/ calls these)
+   +-------------------------------+-------------------------------+
+   |                     INGESTION SERVICE                         |
+   |  ingest/service.py    batched · gap-aware · incremental       |
+   |  ingest/realtime.py   websocket · backoff · dedupe · gaps     |
+   |  data/quality.py      validate BEFORE write; flag, never hide |
+   +-------------------------------+-------------------------------+
+                                   |
+   +-------------------------------+-------------------------------+
+   |                    MARKET DATABASE (market.db)                |
+   |  RAW      market_data_{daily,1m,5m,15m,1h} · raw_trades       |
+   |           raw_quotes · corporate_actions · options_contracts  |
+   |  DERIVED  technical_indicators · strategy_features            |
+   |           market_regimes · sector_data · scanner_results      |
+   |  META     data_sync_status · dataset_versions · api_usage      |
+   +-------------------------------+-------------------------------+
+                                   |
+   +-------------------------------+-------------------------------+
+   |                          READ LAYER                           |
+   |  marketstore/repository.DbProvider  (a provider, no network)  |
+   |  -> registry.DataHub  (db first; a miss PERSISTS a backfill)  |
    |  -> types.PriceSeries (.upto(i) is the point-in-time guard)   |
-   |  -> quality.validate  -> panel.Panel (cross-sectional)        |
+   |  -> panel.Panel (cross-sectional)                             |
    +-------------------------------+-------------------------------+
                                    |
               +--------------------+--------------------+
@@ -26,6 +50,7 @@
         +--------------+-----------+-----------+--------------+
         |              |                       |              |
   backtest/engine  scanner/scan       stats/analogs      ai/analyzer
+   (locks a       screener/sql_screener
         |              |                       |              |
   metrics                                statistics       verdict + bear case
   walkforward                            (stats/core)          |
@@ -45,6 +70,25 @@
                                    |
                        api/app.py  ->  web/  (dark terminal)
 ```
+
+## Data-layer invariants
+
+**Only `ingest/` calls a vendor.** Everything else addresses `DbProvider`, which
+has no network code. A store miss does not fall through silently: the DataHub
+asks the ingestion service to fetch *and persist* the range, then re-reads it, so
+the same bars are never bought twice.
+
+**Raw is never written by a calculation.** `MarketStore` exposes no method that
+writes into a `market_data_*` table from an indicator. Derived tables are
+droppable by design and carry `feature_version` plus a hash of the detector
+parameters, so a threshold change invalidates rows instead of mixing two
+definitions in one screen.
+
+**Vendors never mix silently.** `upsert_bars` refuses to overwrite a bar another
+provider supplied unless told to, and records the conflict.
+
+**A backtest pins its bytes.** `lock_dataset` checksums every bar in scope before
+the run and stores provider, feed, adjustment, universe, range and row count.
 
 ## Invariants
 

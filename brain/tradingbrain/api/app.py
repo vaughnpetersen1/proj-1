@@ -105,6 +105,8 @@ def _dashboard(q, body):
                      "unsupported": len(rd["unsupported"]),
                      "insufficient": len(rd["insufficient"])},
         "alerts": STORE.alert_events(10),
+        "freshness": __import__("tradingbrain.marketstore.store",
+                                fromlist=["MARKET"]).MARKET.freshness("1d"),
     }
 
 
@@ -249,6 +251,8 @@ def _backtest(q, body):
                               trades=[t.to_dict() for t in r.trades][:3000],
                               equity_curve=r.equity_curve, data_origin=r.data_origin,
                               data_provider=r.data_provider, warnings=r.warnings,
+                              dataset_version_id=r.provenance.get("dataset_version_id"),
+                              provenance=r.provenance,
                               runtime_seconds=r.runtime_seconds)
     d = r.to_dict()
     d["backtest_id"] = bid
@@ -541,6 +545,194 @@ def _call_tool(q, body):
     from ..ai.tools import call_tool
     args = {k: v for k, v in body.items() if not k.startswith("_")}
     return call_tool(body["_path"][0], **args)
+
+
+
+
+# ---------------------------------------------------------------------------
+# market-data infrastructure
+# ---------------------------------------------------------------------------
+
+@route("GET", r"/api/data/status")
+def _data_status(q, body):
+    from ..cli import data_status
+    return data_status()
+
+
+@route("GET", r"/api/data/freshness")
+def _data_freshness(q, body):
+    from ..ingest import REALTIME
+    from ..marketstore.store import MARKET
+    f = MARKET.freshness(q.get("timeframe", "1d"))
+    f["realtime"] = REALTIME.status()
+    f["features"] = MARKET.feature_coverage()
+    return f
+
+
+@route("GET", r"/api/data/coverage/([A-Za-z0-9._-]+)")
+def _data_coverage(q, body):
+    from ..marketstore.store import MARKET
+    sym = body["_path"][0]
+    return {
+        "symbol": sym.upper(),
+        "timeframes": {tf: MARKET.coverage(sym, tf)
+                       for tf in ("1d", "1h", "15m", "5m", "1m")},
+        "sync": [r for r in MARKET.sync_status(limit=200)
+                 if r["symbol"] == sym.upper()],
+        "corporate_actions": MARKET.corporate_actions(sym)[-20:],
+        "quality_flags": [f for f in MARKET.flags(unresolved_only=False, limit=200)
+                          if f["symbol"] == sym.upper()][:20],
+    }
+
+
+@route("POST", r"/api/data/bootstrap")
+def _data_bootstrap(q, body):
+    from ..cli import bootstrap_data
+    return bootstrap_data(years=body.get("years"), symbols=body.get("symbols"),
+                          max_symbols=body.get("max_symbols"))
+
+
+@route("POST", r"/api/data/universe")
+def _data_universe(q, body):
+    from ..ingest import INGEST
+    return INGEST.sync_universe(body.get("provider"), body.get("max_symbols"))
+
+
+@route("POST", r"/api/data/backfill")
+def _data_backfill(q, body):
+    from ..ingest import INGEST
+    from ..marketstore.store import MARKET
+    symbols = body.get("symbols") or MARKET.symbol_list()
+    if isinstance(symbols, str):
+        symbols = [s.strip().upper() for s in symbols.split(",") if s.strip()]
+    res = INGEST.backfill(symbols, body.get("timeframe", "1d"),
+                          _date(body.get("start")), _date(body.get("end")),
+                          body.get("provider"), bool(body.get("force")))
+    res.pop("results", None)
+    return res
+
+
+@route("POST", r"/api/data/sync")
+def _data_sync(q, body):
+    from ..ingest import INGEST
+    res = INGEST.incremental_sync(body.get("timeframe", "1d"), body.get("symbols"))
+    res.pop("results", None)
+    return res
+
+
+@route("POST", r"/api/data/features")
+def _data_features(q, body):
+    from ..ingest import FEATURES
+    res = FEATURES.compute_universe(body.get("symbols"),
+                                    lookback_bars=body.get("bars"))
+    res.pop("skipped_detail", None)
+    return res
+
+
+@route("POST", r"/api/data/context")
+def _data_context(q, body):
+    from ..ingest import refresh_context
+    return refresh_context(_date(body.get("as_of")))
+
+
+@route("POST", r"/api/data/validate")
+def _data_validate(q, body):
+    from ..ingest import INGEST
+    return INGEST.validate_store(body.get("timeframe", "1d"), body.get("symbols"))
+
+
+@route("POST", r"/api/data/clear")
+def _data_clear(q, body):
+    from ..marketstore.store import MARKET
+    what = body.get("what", "all")
+    if what == "raw":
+        return {"refused": True,
+                "reason": ("raw market data is never cleared from the UI. Derived tables "
+                           "are recomputable; raw bars cost API calls to replace. Use "
+                           "`cli data clear` deliberately, or delete a single symbol with "
+                           "MarketStore.delete_bars.")}
+    return {"cleared": MARKET.clear_derived(what),
+            "note": "derived tables only; raw bars, ticks and corporate actions untouched"}
+
+
+@route("POST", r"/api/data/corporate-actions")
+def _data_ca(q, body):
+    from ..ingest import INGEST
+    from ..marketstore.store import MARKET
+    return INGEST.sync_corporate_actions(body.get("symbols") or MARKET.symbol_list()[:50])
+
+
+@route("POST", r"/api/data/options")
+def _data_options(q, body):
+    from ..ingest import INGEST
+    return INGEST.sync_options(body.get("symbol", ""))
+
+
+@route("GET", r"/api/data/datasets")
+def _datasets(q, body):
+    from ..marketstore.store import MARKET
+    return {"datasets": MARKET.dataset_versions(_i(q, "limit", 50) or 50)}
+
+
+@route("GET", r"/api/data/datasets/(\d+)")
+def _dataset(q, body):
+    from ..marketstore.store import MARKET
+    return MARKET.dataset_version(int(body["_path"][0])) or {"error": "not found"}
+
+
+@route("GET", r"/api/data/log")
+def _data_log(q, body):
+    from ..marketstore.store import MARKET
+    return {"log": MARKET.logs(_i(q, "limit", 100) or 100, q.get("level")),
+            "quality_flags": MARKET.flags(limit=100),
+            "api_usage": MARKET.api_usage(_i(q, "hours", 24) or 24)}
+
+
+@route("POST", r"/api/data/stream")
+def _data_stream(q, body):
+    from ..ingest import REALTIME
+    action = body.get("action", "status")
+    if action == "start":
+        return REALTIME.start(body.get("symbols"), tuple(body.get("channels") or ("bars",)))
+    if action == "stop":
+        return REALTIME.stop()
+    return {"status": REALTIME.status()}
+
+
+# ---------------------------------------------------------------------------
+# SQL screener
+# ---------------------------------------------------------------------------
+
+@route("GET", r"/api/screen/filters")
+def _screen_filters(q, body):
+    from ..screener.sql_screener import (FILTER_CATALOG, SAR_PRESET, ScreenFilters,
+                                         UNAVAILABLE_FILTERS)
+    import dataclasses as _dc
+    return {"fields": [f.name for f in _dc.fields(ScreenFilters)],
+            "described": FILTER_CATALOG,
+            "unavailable": UNAVAILABLE_FILTERS,
+            "presets": {"sar": SAR_PRESET}}
+
+
+@route("POST", r"/api/screen")
+def _screen(q, body):
+    from ..data.providers.registry import HUB
+    from ..screener.sql_screener import SAR_PRESET, run_screen
+    filters = body.get("filters")
+    if body.get("preset") == "sar":
+        filters = {**SAR_PRESET, **(filters or {})}
+    return run_screen(filters or {}, _date(body.get("as_of")),
+                      int(body.get("limit", 100)),
+                      order_by=body.get("order_by", "base_quality"),
+                      save=bool(body.get("save", True)),
+                      strategy=body.get("strategy"),
+                      themes=HUB.themes())
+
+
+@route("GET", r"/api/screen/latest")
+def _screen_latest(q, body):
+    from ..marketstore.store import MARKET
+    return MARKET.latest_scan() or {"reason": "no screen has been run yet"}
 
 
 # ---------------------------------------------------------------------------

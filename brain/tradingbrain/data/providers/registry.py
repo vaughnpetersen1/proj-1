@@ -11,6 +11,7 @@ from ...config import SETTINGS, Settings
 from ...provenance import DataOrigin
 from ..types import PriceSeries, Timeframe
 from .base import Provider, ProviderUnavailable
+from .alpaca import AlpacaProvider
 from .csv_cache import CsvCacheProvider
 from .http_vendors import PolygonProvider, StooqProvider, TiingoProvider, YahooProvider
 from .synthetic import SECTOR_ETF, THEMES, SyntheticProvider
@@ -42,7 +43,16 @@ def reset_availability_cache() -> None:
 
 
 def build_providers(settings: Settings = SETTINGS) -> dict[str, Provider]:
+    # Imported here so the market store is only constructed when providers are
+    # actually built -- importing the registry must not create a database file.
+    from ...marketstore.repository import DbProvider
+    from ...marketstore.store import MARKET
     return {
+        "db": DbProvider(MARKET),
+        "alpaca": AlpacaProvider(settings.alpaca_api_key, settings.alpaca_api_secret,
+                                 feed=settings.alpaca_data_feed,
+                                 paper=settings.alpaca_paper,
+                                 usage_recorder=MARKET.record_api_call),
         "csv": CsvCacheProvider(settings.cache_dir),
         "stooq": StooqProvider(),
         "yahoo": YahooProvider(),
@@ -123,9 +133,44 @@ class DataHub:
         return hit.between(start, end)
 
     def _fetch_daily(self, symbol: str, provider: str | None) -> PriceSeries:
+        """DB first. A miss triggers a PERSISTED backfill, never a throwaway fetch."""
         errors: list[str] = []
+        if provider:
+            return self._direct(symbol, provider, errors)
+
+        # 1. the local store
+        try:
+            return get_provider("db").daily(symbol)          # type: ignore[attr-defined]
+        except (KeyError, ProviderUnavailable) as exc:
+            errors.append(f"db: {exc}")
+
+        # 2. ingest the missing history once, into the store, then read it back
+        if self.settings.allow_ondemand_backfill:
+            note = self.ensure([symbol], "1d")
+            if note.get("rows_written"):
+                try:
+                    series = get_provider("db").daily(symbol)  # type: ignore[attr-defined]
+                    self._resolved[symbol.upper()] = "db"
+                    return series
+                except (KeyError, ProviderUnavailable) as exc:
+                    errors.append(f"db after backfill: {exc}")
+            else:
+                errors.append("backfill: " + str(note.get("reason")
+                                                 or note.get("errors") or note))
+        else:
+            errors.append("on-demand backfill is disabled (BRAIN_ALLOW_ONDEMAND_BACKFILL); "
+                          f"run `cli data backfill {symbol}` first")
+
+        # 3. last resort: read a vendor directly, without persisting. Only
+        #    reached when ingestion itself could not store the data.
+        return self._direct(symbol, None, errors)
+
+    def _direct(self, symbol: str, provider: str | None,
+                errors: list[str]) -> PriceSeries:
         order = (provider,) if provider else self.settings.provider_order
         for name in order:
+            if name == "db" and not provider:
+                continue
             try:
                 p = get_provider(name)
             except KeyError as exc:
@@ -148,8 +193,23 @@ class DataHub:
                 errors.append(f"{name}: {exc}")
         raise ProviderUnavailable(
             f"No provider could supply daily bars for {symbol}. Tried -> "
-            + " | ".join(errors)
-        )
+            + " | ".join(errors))
+
+    def ensure(self, symbols: list[str], timeframe: str = "1d",
+               start: dt.date | None = None, end: dt.date | None = None) -> dict[str, Any]:
+        """Make sure the store holds `symbols` over the window, fetching only gaps.
+
+        This is the call a backtest makes before it starts: it turns "the engine
+        might hit the API mid-run" into "the data is present or the run says why
+        not", and every byte fetched is persisted for next time.
+        """
+        from ...ingest.service import IngestionService
+        svc = IngestionService(settings=self.settings)
+        try:
+            return svc.backfill(symbols, timeframe, start, end)
+        except Exception as exc:                              # noqa: BLE001
+            return {"ok": False, "reason": f"{type(exc).__name__}: {exc}",
+                    "rows_written": 0}
 
     def intraday(self, symbol: str, timeframe: Timeframe, start: dt.date | None = None,
                  end: dt.date | None = None, provider: str | None = None) -> PriceSeries:
@@ -159,6 +219,11 @@ class DataHub:
         if hit is not None:
             return hit
         errors: list[str] = []
+        if provider is None and self.settings.allow_ondemand_backfill:
+            try:
+                get_provider("db").intraday(symbol, timeframe, start, end)  # type: ignore[attr-defined]
+            except (KeyError, ProviderUnavailable):
+                self.ensure([symbol], timeframe.value, start, end)
         order = (provider,) if provider else self.settings.provider_order
         for name in order:
             try:
@@ -226,8 +291,24 @@ class DataHub:
         except ProviderUnavailable:
             return DataOrigin.UNKNOWN
 
+    def freshness(self, timeframe: str = "1d") -> dict[str, Any]:
+        from ...marketstore.store import MARKET
+        return MARKET.freshness(timeframe)
+
     def data_note(self) -> str:
         prov = self.active_daily_provider()
+        if prov == "db":
+            from ...marketstore.store import MARKET
+            stats = MARKET.stats()
+            by = stats["daily_bars_by_provider"]
+            origins = ", ".join(f"{r['provider']}/{r['feed'] or '-'} ({r['rows']:,} bars)"
+                                for r in by[:3]) or "empty"
+            synth = any("synthetic" in (r["provider"] or "") for r in by)
+            head = ("ACTIVE DATA PATH: local market database -- " + origins)
+            if synth:
+                head += (". Some or all bars were written by the SYNTHETIC generator and "
+                         "are not evidence about real markets.")
+            return head
         if prov == "synthetic":
             return ("ACTIVE DATA PATH: synthetic generator. Every statistic below is "
                     "computed on generated data and is NOT evidence about real markets. "
