@@ -1,0 +1,4 @@
+# Runtime. numpy is the only hard dependency: the API server, database, charts
+# and every engine are stdlib. That is deliberate -- this system has to run on a
+# machine with no outbound network, which is the environment it was built in.
+numpy>=1.24

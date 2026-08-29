@@ -1,0 +1,9 @@
+.env
+data_cache/*.db
+data_cache/*.db-wal
+data_cache/*.db-shm
+data_cache/daily/
+data_cache/intraday/
+__pycache__/
+*.pyc
+.pytest_cache/
