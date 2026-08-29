@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Trading Brain</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b0e13'/><path d='M5 22 L11 14 L16 18 L27 7' stroke='%234da3ff' stroke-width='2.5' fill='none'/></svg>">
+</head>
+<body>
+<div id="app">
+  <nav>
+    <div class="brand"><b>TRADING BRAIN</b><span>QUANT RESEARCH TERMINAL</span></div>
+    <ul id="nav"></ul>
+    <div class="foot" id="navfoot">loading…</div>
+  </nav>
+  <main>
+    <header class="topbar">
+      <h1 id="title">Dashboard</h1>
+      <span id="freshness" class="freshness" title="market data status"></span>
+      <span class="spacer"></span>
+      <span id="origin-pill"></span>
+      <span id="provider-pill"></span>
+      <span id="asof" class="faint mono"></span>
+    </header>
+    <div id="view" class="view"><div class="loading">loading…</div></div>
+  </main>
+</div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

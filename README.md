@@ -9,6 +9,24 @@ Two income engines, one repo, one goal: **$200+/month net by the end of month 2.
 
 Read **[PLAN.md](PLAN.md)** for the full strategy, budget, and week-by-week playbook.
 
+## Third engine: AI Trading Brain (`brain/`)
+
+A quantitative trading research and decision-support system built around the
+SAR / Morgan Trades momentum breakout methodology. Formalises qualitative
+trading rules into testable definitions, backtests them without look-ahead,
+and reports evidence honestly — including when the evidence contradicts the
+source. Not a signal service; a research apparatus.
+
+```
+cd brain && python3 -m pip install -r requirements.txt
+python3 -m tradingbrain.cli seed && python3 -m tradingbrain.cli serve
+```
+
+Read **[brain/README.md](brain/README.md)** — it explains the evidence-class
+system, what is deliberately not built, and how to feed it real market data
+(it ships on a clearly-labelled synthetic generator because this environment
+has no market-data network access).
+
 ## Repo map
 
 ```
