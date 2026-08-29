@@ -15,6 +15,10 @@ from datetime import date, datetime
 LEADS = os.path.join(os.path.dirname(__file__), "leads.csv")
 
 FOLLOWUP_AFTER_DAYS = {"contacted": 3, "followup1": 7}
+
+# House rule 10 (boss-set 2026-07-30): these niches are too price-sensitive and
+# have said no repeatedly. They never enter the send queue -- see ICP.md.
+OFF_ICP_NICHES = {"barber", "salon", "nail", "beauty", "barbershop"}
 FUNNEL_ORDER = ["lead", "contacted", "followup1", "followup2", "replied",
                 "closed_won", "closed_lost", "dead"]
 
@@ -38,7 +42,11 @@ def main() -> None:
     print(f"\n📊 PIPELINE — {len(rows)} leads")
     print("   " + "  ·  ".join(f"{s}: {counts[s]}" for s in FUNNEL_ORDER if s in counts))
 
-    untouched = [r for r in rows if r["status"] == "lead"]
+    all_untouched = [r for r in rows if r["status"] == "lead"]
+    untouched = [r for r in all_untouched
+                 if r["niche"].strip().lower() not in OFF_ICP_NICHES]
+    off_icp = [r for r in all_untouched
+               if r["niche"].strip().lower() in OFF_ICP_NICHES]
     due = [r for r in rows
            if r["status"] in FOLLOWUP_AFTER_DAYS
            and days_since(r["last_touch"]) >= FOLLOWUP_AFTER_DAYS[r["status"]]]
@@ -56,11 +64,17 @@ def main() -> None:
             print(f"   • {r['business']} ({r['niche']}) — {days_since(r['last_touch'])}d since last touch → send {nxt}")
 
     if untouched:
-        print(f"\n📬 NEVER CONTACTED ({len(untouched)}):")
+        print(f"\n📬 NEVER CONTACTED — SENDABLE ({len(untouched)}):")
         for r in untouched[:8]:
             print(f"   • {r['business']} ({r['niche']}) via {r['channel']}: {r['contact']}")
         if len(untouched) > 8:
             print(f"   ...and {len(untouched) - 8} more")
+
+    if off_icp:
+        print(f"\n🚫 OFF-ICP — DO NOT SEND ({len(off_icp)}), house rule 10:")
+        for r in off_icp:
+            print(f"   • {r['business']} ({r['niche']}, {r['city']})")
+        print("   Price-sensitive niches. Mark 'disqualified' or requalify per ICP.md.")
 
     won = counts.get("closed_won", 0)
     finished = won + counts.get("closed_lost", 0) + counts.get("dead", 0)
