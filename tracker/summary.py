@@ -10,7 +10,12 @@ LEDGER = os.path.join(os.path.dirname(__file__), "ledger.csv")
 months = defaultdict(lambda: defaultdict(float))
 with open(LEDGER, newline="") as f:
     for row in csv.DictReader(f):
-        month = row["date"][:7]
+        # ledger.csv carries "#" note lines (portfolio/context notes) between
+        # real rows; skip those and any row missing an amount.
+        date = (row.get("date") or "").strip()
+        if not date or date.startswith("#") or not (row.get("amount") or "").strip():
+            continue
+        month = date[:7]
         months[month][row["engine"]] += float(row["amount"])
         months[month]["_net"] += float(row["amount"])
 
